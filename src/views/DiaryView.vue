@@ -1,7 +1,7 @@
 <template>
     <div class="diary-container ">
         <div v-for="diary_card in diary_list" :key="diary_card.diary_no" >
-            <DiaryCard/>
+            <DiaryCard :diaryData="diary_card"/>
         </div>
         <infinite-loading @infinite="getDiary" spinner="waveDots">무한스크롤 끄읏 :)</infinite-loading>
     </div>
@@ -25,8 +25,13 @@ export default {
     methods : {
         getDiary ($state){
             axios.get(`${config.localUrl}/diary/list`).then((res)=> {
-                console.log('다이어리 리스트 : ',res);
-                this.diary_list.push(res)
+                console.log('다이어리 리스트 : ',res.data);
+                let _data = res.data
+            
+                for (let i = 0; i < _data.length; i++){
+                   this.diary_list.push(_data[i]);
+                }
+               
                 $state.loaded();
             }).catch((err)=> {
                 console.log('diary_list_err',err)
@@ -40,14 +45,15 @@ export default {
 }
 </script>
 
-<style>
-    .diary-container {
+<style lang="scss" scoped>
+  .diary-container {
     padding-top: 50px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: auto;
     grid-gap: 10px;
-    width: 100%;    
+    width: 100%;
+
     @media (min-width: 1440px) {
        grid-gap: 5px;
     }

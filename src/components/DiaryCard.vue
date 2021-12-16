@@ -1,29 +1,103 @@
 <template>
-  <div>
-    <b-card
-        title="Card Title"
-        img-src="https://picsum.photos/600/300/?image=25"
-        img-alt="Image"
-        img-top
-        tag="article"
-        style="max-width: 20rem;"
-        class="mb-2"
-    >
-        <b-card-text>
-        Some quick example text to build on the card title and make up the bulk of the card's content.
-        </b-card-text>
-
-        <b-button href="#" variant="primary">Go somewhere</b-button>
-    </b-card>
-    </div>
+  <div class="card-container" v-on:click="search(cardData.title)" @mouseenter="mouseOver" @mouseleave ="mouseOver">
+    <router-link to="/searchResult">
+        <div class="card">
+            asddddddddddddddddddddddddddddddddddddddddddddddd
+            <!-- <img class="card-img" src="https://pbs.twimg.com/profile_images/1235652877059842049/IUi1TKu7_400x400.jpg"  alt="">  -->
+            <span class="hover">
+                <div class="hover-font" >ddddddddd<br><br>dddddddddddd</div>
+            </span> 
+        </div>
+    </router-link>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
-    name : "DiaryCard"
+    name : "DiaryCard",
+    props: ['diaryData'],
+    data () {
+       return {
+         isHover : false,
+         searchContent : ""
+       } 
+    },
+    methods : {
+        mouseOver (){
+          //console.log('마우스');
+          this.isHover = !this.isHover
+        },
+        goUrl (url){
+          window.location.href = url;
+        },
+        search (searchUrl){
+          let regex = /[^0-9]/gi;
+          console.log('검색어1 : ', searchUrl)
+          let replaceSearch = searchUrl.replace(regex,"");
+          axios.post(`http://localhost:8000/search/url=${replaceSearch}`).then((res) =>{
+            console.log('블로그 검색결과 : ',res)
+            this.$store.commit('SET_SEARCH_RESULT', res);
+          }).catch((err)=>{
+            console.log('에러 : ',err)
+          })
+        },
+    },
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+    .card-container{
+        width: 400px;
+        height: 400px;
+    }
+
+    .card-wrap{
+        z-index: 200;
+        width: 100%;
+    
+    }
+
+    .card{
+        background-position: center;
+        width: 100%;
+        aspect-ratio: 1/1; 
+        background-size: cover;
+        background-repeat: no-repeat;
+        cursor: pointer;   
+        border: none;
+    
+    }
+
+    .card-img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        background-repeat: no-repeat;
+        cursor: pointer;  
+    }
+
+    .hover {
+        font-size: 0.5rem;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        width: 100%;
+        height: 100%;
+        opacity: 1;
+        color: white;
+    }
+
+    .hover-font{
+        font-size: 0.5rem;
+        color: white;
+        text-align: center;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
 
 </style>
