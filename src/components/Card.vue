@@ -50,7 +50,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 .card-container{
     /* width: 400px;
     height: 400px; */

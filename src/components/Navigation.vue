@@ -3,7 +3,9 @@
     <b-nav >
         <router-link to="/"><b-nav-text>HOT SPOT&nbsp;&nbsp;</b-nav-text></router-link>
         <b-nav-item @click="goUpload()">Post</b-nav-item>
+        <b-nav-item @click="goDiary()">Diary</b-nav-item>
         <b-nav-item @click="goLogin()">Login</b-nav-item>
+        <b-nav-item @click="goLogOut()">LogOut</b-nav-item>
     </b-nav>
 </div>
 </template>
@@ -18,6 +20,9 @@ export default {
         goLogin () {
             this.$router.push('login')
         },
+        goDiary () {
+            this.$router.push('diaryView')
+        }
     }
 
 }

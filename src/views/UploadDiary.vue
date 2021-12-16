@@ -1,5 +1,5 @@
 <template>
-  <div class="diary-container">
+  <div class="diary-upload-container">
     <div>
       <label>Title</label>
       <b-form-textarea
@@ -66,8 +66,10 @@ export default {
 }
 </script>
 
-<style>
-  .diary-container {
+<style lang="scss" scoped>
+  .diary-upload-container {
+    display: flex !important;
+    flex-direction: column;
     width: 80%;
     position: absolute;
     top: 20%;
