@@ -3,7 +3,7 @@
         <div v-for="diary_card in diary_list" :key="diary_card.diary_no" >
             <DiaryCard :diaryData="diary_card"/>
         </div>
-        <infinite-loading @infinite="getDiary" spinner="waveDots">무한스크롤 끄읏 :)</infinite-loading>
+        <infinite-loading @infinite="getDiary" spinner="waveDots">무한스크롤 끄읏 :)</infinite-loading> 
     </div>
 </template>
 
@@ -11,12 +11,12 @@
 import axios from 'axios'
 import { config } from '../config'
 import DiaryCard from '../components/DiaryCard.vue'
-import InfiniteLoading from "vue-infinite-loading";
+//import InfiniteLoading from "vue-infinite-loading";
 //import ScrollTop from '../components/ScrollTop.vue'
 
 export default {
     name: 'DiaryView',
-    components : { DiaryCard, InfiniteLoading } ,
+    components : { DiaryCard } ,
     data() {
       return {
         diary_list : []

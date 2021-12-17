@@ -1,14 +1,14 @@
 <template>
-  <div class="card-container" v-on:click="search(cardData.title)" @mouseenter="mouseOver" @mouseleave ="mouseOver">
-    <router-link to="/searchResult">
-        <div class="card">
-            asddddddddddddddddddddddddddddddddddddddddddddddd
-            <!-- <img class="card-img" src="https://pbs.twimg.com/profile_images/1235652877059842049/IUi1TKu7_400x400.jpg"  alt="">  -->
-            <span class="hover">
-                <div class="hover-font" >ddddddddd<br><br>dddddddddddd</div>
-            </span> 
-        </div>
-    </router-link>
+  <div class="card-container" >
+    <div class="card">
+        <img class="card-img" src="https://images.pexels.com/photos/2825240/pexels-photo-2825240.jpeg?cs=srgb&dl=pexels-david-bartus-2825240.jpg&fm=jpg"  alt="">  
+        <span class="hover">
+            <div class="hover-font">{{diaryData.title}}<br><br>
+              <span class="hover-content">{{diaryData.content}}</span>
+            </div>
+        </span> 
+    </div>
+  </div>
 </template>
 
 <script>
@@ -48,8 +48,8 @@ export default {
 
 <style lang="scss" scoped>
     .card-container{
-        width: 400px;
-        height: 400px;
+        /* width: 400px;
+        height: 400px; */
     }
 
     .card-wrap{
@@ -78,12 +78,12 @@ export default {
     }
 
     .hover {
-        font-size: 0.5rem;
+        overflow: hidden;
         position: absolute;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(0, 0, 0, 0.4);
         width: 100%;
         height: 100%;
         opacity: 1;
@@ -91,13 +91,16 @@ export default {
     }
 
     .hover-font{
-        font-size: 0.5rem;
+        font-size: 1rem;
         color: white;
         text-align: center;
         position: absolute;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
+    }
+    .hover-content {
+        font-size: 0.8rem;
     }
 
 </style>
