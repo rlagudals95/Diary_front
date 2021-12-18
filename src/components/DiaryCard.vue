@@ -3,8 +3,10 @@
     <div class="card">
         <img class="card-img" src="https://images.pexels.com/photos/2825240/pexels-photo-2825240.jpeg?cs=srgb&dl=pexels-david-bartus-2825240.jpg&fm=jpg"  alt="">  
         <span class="hover">
-            <div class="hover-font">{{diaryData.title}}<br><br>
-              <span class="hover-content">{{diaryData.content}}</span>
+            <div class="font-wrap">
+              <div class="hover-font">{{diaryData.title}}<br><br>
+                <span class="hover-content">{{diaryData.content}}</span>
+              </div>
             </div>
         </span> 
     </div>
@@ -59,48 +61,54 @@ export default {
     }
 
     .card{
-        background-position: center;
-        width: 100%;
-        aspect-ratio: 1/1; 
-        background-size: cover;
-        background-repeat: no-repeat;
-        cursor: pointer;   
-        border: none;
-    
+      background-position: center;
+      width: 100%;
+      aspect-ratio: 1/1; 
+      background-size: cover;
+      background-repeat: no-repeat;
+      cursor: pointer;   
+      border: none;
     }
 
     .card-img {
-        object-fit: cover;
-        width: 100%;
-        height: 100%;
-        background-repeat: no-repeat;
-        cursor: pointer;  
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      background-repeat: no-repeat;
+      cursor: pointer;  
     }
 
     .hover {
-        overflow: hidden;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        background-color: rgba(0, 0, 0, 0.4);
-        width: 100%;
-        height: 100%;
-        opacity: 1;
-        color: white;
+      overflow: hidden;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.4);
+      width: 100%;
+      height: 100%;
+      opacity: 1;
+      color: white;  
     }
-
+    .font-wrap {
+      overflow: hidden;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 80%;
+      display: flex;
+      flex-direction: column;
+    }
     .hover-font{
-        font-size: 1rem;
-        color: white;
-        text-align: center;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
+      font-size: 1rem;
+      color: white;
+      text-align: center;
     }
     .hover-content {
         font-size: 0.8rem;
     }
+
 
 </style>

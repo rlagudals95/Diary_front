@@ -1,5 +1,6 @@
 <template>
   <div>
+    <ScrollTop/>
     <div class="diary-container">
         <div v-for="diary_card in diary_list" :key="diary_card.diary_no" >
             <DiaryCard :diaryData="diary_card"/>
@@ -14,11 +15,11 @@ import axios from 'axios'
 import { config } from '../config'
 import DiaryCard from '../components/DiaryCard.vue'
 //import InfiniteLoading from "vue-infinite-loading";
-//import ScrollTop from '../components/ScrollTop.vue'
+import ScrollTop from '../components/ScrollTop.vue'
 
 export default {
     name: 'DiaryView',
-    components : { DiaryCard } ,
+    components : { DiaryCard, ScrollTop } ,
     data() {
       return {
         diary_list : [],
@@ -40,11 +41,11 @@ export default {
                   for (let i = 0; i < _data.length; i++){
                     this.diary_list.push(_data[i]);
                   }    
-                  this.page += 10;
+                  this.page += 12;
                   $state.loaded(); 
-                  // if (this.diary_list.length/10 == 0){
-                  //   $state.complete();
-                  // }
+                  if (this.diary_list.length/12 == 0){
+                    $state.complete();
+                  }
                }else {
                  $state.complete();
                }
