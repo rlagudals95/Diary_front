@@ -60,8 +60,6 @@ export default {
 </script>
 
 <style lang='scss' scoped >
- 
-
   .container {
     padding-top: 50px;
     display: grid;

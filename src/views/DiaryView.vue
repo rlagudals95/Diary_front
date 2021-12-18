@@ -1,10 +1,12 @@
 <template>
-    <div class="diary-container ">
+  <div>
+    <div class="diary-container">
         <div v-for="diary_card in diary_list" :key="diary_card.diary_no" >
             <DiaryCard :diaryData="diary_card"/>
         </div>
-        <infinite-loading @infinite="getDiary" spinner="waveDots">무한스크롤 끄읏 :)</infinite-loading> 
     </div>
+     <infinite-loading @infinite="infiniteHandler" spinner="waveDots">무한스크롤 끄읏 :)</infinite-loading> 
+  </div>
 </template>
 
 <script>
@@ -19,29 +21,39 @@ export default {
     components : { DiaryCard } ,
     data() {
       return {
-        diary_list : []
+        diary_list : [],
+        isLoading: false ,
+        page: 0,
+        size: 12,
       }
     },
     methods : {
-        getDiary ($state){
-            axios.get(`${config.localUrl}/diary/list`).then((res)=> {
-                console.log('다이어리 리스트 : ',res.data);
-                let _data = res.data
-            
-                for (let i = 0; i < _data.length; i++){
-                   this.diary_list.push(_data[i]);
-                }
-               
-                $state.loaded();
-            }).catch((err)=> {
-                console.log('diary_list_err',err)
-            })
+        infiniteHandler ($state){
+           axios.post(`${config.localUrl}/diary/list`,  {
+                  page: this.page,
+                  size: this.size
+           }).then(res => {
+             setTimeout(()=> {
+               if(res.data.length){
+                  let _data = res.data
+
+                  for (let i = 0; i < _data.length; i++){
+                    this.diary_list.push(_data[i]);
+                  }    
+                  this.page += 10;
+                  $state.loaded(); 
+                  // if (this.diary_list.length/10 == 0){
+                  //   $state.complete();
+                  // }
+               }else {
+                 $state.complete();
+               }
+             },1000)
+           }).catch(err => {
+             console.error(err)
+           })
         }
     },
-    created (){
-        this.getDiary();
-    }
-
 }
 </script>
 
@@ -53,7 +65,6 @@ export default {
     grid-template-rows: auto;
     grid-gap: 10px;
     width: 100%;
-
     @media (min-width: 1440px) {
        grid-gap: 5px;
     }

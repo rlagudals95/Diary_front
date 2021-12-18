@@ -19,7 +19,7 @@ export default {
     props: ['diaryData'],
     data () {
        return {
-         isHover : false,
+         isHover : false, 
          searchContent : ""
        } 
     },
