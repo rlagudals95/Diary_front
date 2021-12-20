@@ -1,5 +1,6 @@
 <template>
   <div>
+    {{diary}}
     <ScrollTop/>
     <div class="diary-container">
         <div v-for="diary_card in diary_list" :key="diary_card.diary_no" >
@@ -16,6 +17,7 @@ import { config } from '../config'
 import DiaryCard from '../components/DiaryCard.vue'
 //import InfiniteLoading from "vue-infinite-loading";
 import ScrollTop from '../components/ScrollTop.vue'
+import { mapState } from 'vuex'
 
 export default {
     name: 'DiaryView',
@@ -38,6 +40,8 @@ export default {
                if(res.data.length){
                   let _data = res.data
 
+                  this.$store.commit('SET_DIARY_LIST', res);
+
                   for (let i = 0; i < _data.length; i++){
                     this.diary_list.push(_data[i]);
                   }    
@@ -54,6 +58,11 @@ export default {
              console.error(err)
            })
         }
+    },
+    computed : {
+      ...mapState({
+          diary : state => state.diary.diary_list
+      })     
     },
 }
 </script>

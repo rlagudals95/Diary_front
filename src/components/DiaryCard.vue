@@ -1,5 +1,5 @@
 <template>
-  <div class="card-container" >
+  <div class="card-container"  @click="goDetail">
     <div class="card">
         <img class="card-img" src="https://images.pexels.com/photos/2825240/pexels-photo-2825240.jpeg?cs=srgb&dl=pexels-david-bartus-2825240.jpg&fm=jpg"  alt="">  
         <span class="hover">
@@ -45,6 +45,9 @@ export default {
             console.log('에러 : ',err)
           })
         },
+        goDetail () {
+          this.$router.push('/diaryDetail');
+        }
     },
 }
 </script>
