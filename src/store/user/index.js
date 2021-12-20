@@ -5,6 +5,7 @@ import { mutations } from "./mutations";
 
 const state = {
   isLogin: false,
+  username: "",
 };
 
 export const user = {

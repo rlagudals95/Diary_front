@@ -13,6 +13,7 @@
         rows="1"
         v-model="title"
         required
+        max-rows="1"
       ></b-form-textarea>
     </div>
 

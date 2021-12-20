@@ -3,8 +3,9 @@
     <div class="card">
         <img class="card-img" src="https://images.pexels.com/photos/2825240/pexels-photo-2825240.jpeg?cs=srgb&dl=pexels-david-bartus-2825240.jpg&fm=jpg"  alt="">  
         <span class="hover">
+            <div class="hover-title">{{diaryData.title}}</div>
             <div class="font-wrap">
-              <div class="hover-font">{{diaryData.title}}<br><br>
+              <div class="hover-font">
                 <span class="hover-content">{{diaryData.content}}</span>
               </div>
             </div>
@@ -79,8 +80,10 @@ export default {
     }
 
     .hover {
+      display: flex;
+      flex-direction: column;
       overflow: hidden;
-      position: absolute;
+      //position: absolute;
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
@@ -88,26 +91,32 @@ export default {
       width: 100%;
       height: 100%;
       opacity: 1;
-      color: white;  
     }
     .font-wrap {
       overflow: hidden;
       position: absolute;
       left: 50%;
-      top: 50%;
+      top: 60%;
       transform: translate(-50%, -50%);
-      width: 100%;
-      height: 80%;
+      width: 130%;
+      height: 77%;
       display: flex;
+      padding-top: 30px;
       flex-direction: column;
     }
-    .hover-font{
+    .hover-title{
+      margin-top: 0.8rem;
       font-size: 1rem;
       color: white;
       text-align: center;
     }
+    .hover-font{
+      font-size: 1rem;
+      text-align: center;
+    }
     .hover-content {
-        font-size: 0.8rem;
+      font-size: 0.7rem;
+
     }
 
 
