@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import { spotStore } from "@/store/spot";
 import { user } from "@/store/user";
+import { diary } from "@/store/diary"
 
 Vue.use(Vuex);
 
@@ -13,6 +14,7 @@ const store = new Vuex.Store({
   modules: {
     spotStore: spotStore,
     user: user,
+    diary: diary
   },
 });
 

@@ -30,7 +30,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped >
   .container {
     padding-top: 50px;
     display: grid;
