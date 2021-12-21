@@ -4,7 +4,7 @@
         <router-link to="/"><b-nav-text class="logo" :class="{'nav-down' : navDown}">FOCUS BOOK&nbsp;&nbsp;</b-nav-text></router-link>
         <b-nav-item @click="goUpload()" :class="{'nav-down' : navDown}">Post</b-nav-item>
         <b-nav-item @click="goDiary()" :class="{'nav-down' : navDown}">Diary</b-nav-item>
-        <b-nav-item v-if="isLogin" @click="goLogOut()" :class="{'nav-down' : navDown}">LogOut</b-nav-item>
+        <b-nav-item v-if="isLogin" @click="goLogOut()" :class="{'nav-down' : navDown}">Logout</b-nav-item>
         <b-nav-item v-else @click="goLogin()" :class="{'nav-down' : navDown}">Login</b-nav-item>
     </b-nav>
 </div>
@@ -60,25 +60,30 @@ export default {
 <style>
 .nav-wrap{
     position: fixed;
+    top:0;
+    left: 0;
+    right: 0;
+    margin: 0px auto;
+    padding: 20px;
+    width: 100%;
     z-index: 5000;
     font-weight: bold;
     transform: translate3d(0, 0, 0);
     transition: 0.1s all ease-out;
-    color: black !important;
 }
-.nav-wrap-down{
+/* .nav-wrap-down{
     position: fixed;
     z-index: 5000;
     font-weight: bold;
     transform: translate3d(0, 0, 0);
     transition: 0.1s all ease-out;
     color: white !important;
-}
+} */
 .nav-up {
     color: white !important;
 }
 .nav-down {
-    color: white !important;
+    color: black !important;
 }
 
 </style>

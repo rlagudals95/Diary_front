@@ -3,7 +3,8 @@ import { actions } from "./actions";
 import { mutations } from "./mutations";
 
 const state = {
-  diary_list : []
+  diary_list : [],
+  keyword : "" 
 };
 
 export const diary = {
