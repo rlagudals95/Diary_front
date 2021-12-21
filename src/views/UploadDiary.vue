@@ -1,5 +1,6 @@
 <template>
   <div class="diary-upload-container">
+    <Grammar/>
     <div class="timer-container">
       <label>TIME</label>
       <div>{{this.time}}</div>
@@ -36,10 +37,11 @@
 <script>
 import axios from 'axios';
 import {config} from '../config';
+import Grammar from '../components/Grammar.vue'
 
 export default {
     name: 'UploadDiary',
-    components : {},
+    components : {Grammar},
     data () {
       return {
         title: "",

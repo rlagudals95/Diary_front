@@ -1,9 +1,10 @@
 <template>
   <div id="app">
+    <Navigation />
     <div id="nav">
       <!-- <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> -->
-      <Navigation />
+      
     </div>
     <router-view/>
   </div>
@@ -16,7 +17,7 @@ axios.defaults.headers.common['Authorization'] = localStorage.getItem('Authoriza
 
 export default {
     name: "App",
-    components: {Navigation},
+    components: { Navigation },
     methods :{
       
     }
@@ -26,7 +27,6 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
 
 #app {
-  
   font-family: 'Noto Sans KR', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -35,15 +35,15 @@ export default {
 }
 
 #nav {
-  padding: 30px;
+  //padding: 30px;
 
   a {
     font-weight: bold;
     color: #2c3e50;
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+    // &.router-link-exact-active {
+    //   color: #42b983;
+    // }
   }
 }
 

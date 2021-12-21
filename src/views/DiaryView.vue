@@ -1,9 +1,9 @@
 <template>
   <div>
-    {{diary}}
+    <!-- {{s_diary_list}} -->
     <ScrollTop/>
     <div class="diary-container">
-        <div v-for="diary_card in diary_list" :key="diary_card.diary_no" >
+        <div v-for="diary_card in s_diary_list" :key="diary_card.diary_no" >
             <DiaryCard :diaryData="diary_card"/>
         </div>
     </div>
@@ -24,7 +24,6 @@ export default {
     components : { DiaryCard, ScrollTop } ,
     data() {
       return {
-        diary_list : [],
         isLoading: false ,
         page: 0,
         size: 12,
@@ -38,16 +37,15 @@ export default {
            }).then(res => {
              setTimeout(()=> {
                if(res.data.length){
-                  let _data = res.data
 
                   this.$store.commit('SET_DIARY_LIST', res);
 
-                  for (let i = 0; i < _data.length; i++){
-                    this.diary_list.push(_data[i]);
-                  }    
+                  // for (let i = 0; i < _data.length; i++){
+                  //   this.diary_list.push(_data[i]);
+                  // }    
                   this.page += 12;
                   $state.loaded(); 
-                  if (this.diary_list.length/12 == 0){
+                  if (this.s_diary_list.length/12 == 0){
                     $state.complete();
                   }
                }else {
@@ -61,7 +59,7 @@ export default {
     },
     computed : {
       ...mapState({
-          diary : state => state.diary.diary_list
+          s_diary_list : state => state.diary.diary_list
       })     
     },
 }
@@ -69,7 +67,7 @@ export default {
 
 <style lang="scss" scoped>
   .diary-container {
-    padding-top: 50px;
+    padding-top: 70px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: auto;
