@@ -6,7 +6,8 @@ import UploadDiary from "../views/UploadDiary.vue";
 import Login from "../views/Login.vue";
 import Join from "../views/Join.vue";
 import DiaryView from "../views/DiaryView.vue";
-import DiaryDetail from "../views/DiaryDetail.vue"
+import DiaryDetail from "../views/DiaryDetail.vue";
+import Mypage from "../views/Mypage.vue";
 
 Vue.use(VueRouter);
 
@@ -54,6 +55,11 @@ const routes = [
     path: "/diaryDetail",
     name: "diaryDetail",
     component: DiaryDetail,
+  },
+  {
+    path: "/mypage",
+    name: "mypage",
+    component: Mypage,
   },
 ];
 
