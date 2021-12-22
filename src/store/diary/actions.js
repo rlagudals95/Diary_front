@@ -1,17 +1,16 @@
 import axios from "axios";
-import { mutations } from "./mutations";
+//import { mutations } from "./mutations";
+import {config} from "../../config"
 
 export const actions = {
-  getSeachResults({ state }, payload) {
-    console.log("1 : ", payload.numOfRows);
+  getDetail(diary_no) {
+    console.log('diary_no : ',diary_no)
     axios
       .get(
-        `http://api.kcisa.kr/openapi/service/rest/convergence2019/getConver01?serviceKey=${process.env.VUE_APP_SPOT}&pageNo=${payload.pageNo}&numOfRows=16`
+        `${config.localUrl}/diary/detail`
       )
       .then((res) => {
-        let data = res.data.response.body.items.item;
-        console.log("응답값 : ", data);
-        mutations.SET_SPOTS(state, data, payload.test);
+        console.log("응답값 : ", res);
       })
       .catch((err) => {
         console.log(err);

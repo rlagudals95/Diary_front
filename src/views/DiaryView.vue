@@ -4,7 +4,7 @@
     <ScrollTop/>
     <div class="diary-container">
         <div v-for="diary_card in s_diary_list" :key="diary_card.diary_no" >
-            <DiaryCard :diaryData="diary_card"/>
+            <DiaryCard @click="goDetail(diary_card.diary_no)" :diaryData="diary_card"/>
         </div>
     </div>
      <infinite-loading @infinite="infiniteHandler" spinner="waveDots">무한스크롤 끄읏 :)</infinite-loading> 
@@ -55,8 +55,13 @@ export default {
            }).catch(err => {
              console.error(err)
            })
-        }
+        },
+        goDetail (diary_no){
+          console.log('상세보기 :', diary_no);
+          this.$store.dispatch("getDetail", diary_no)
+        },
     },
+
     computed : {
       ...mapState({
           s_diary_list : state => state.diary.diary_list

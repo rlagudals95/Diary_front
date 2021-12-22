@@ -1,17 +1,16 @@
 import axios from "axios";
+import {config} from "../../config"
 import { mutations } from "./mutations";
 
 export const actions = {
-  getSeachResults({ state }, payload) {
-    console.log("1 : ", payload.numOfRows);
+  getCategory({ state }) {
     axios
-      .get(
-        `http://api.kcisa.kr/openapi/service/rest/convergence2019/getConver01?serviceKey=${process.env.VUE_APP_SPOT}&pageNo=${payload.pageNo}&numOfRows=16`
+      .post(
+        `${config.localUrl}/category/list`
       )
       .then((res) => {
-        let data = res.data.response.body.items.item;
-        console.log("응답값 : ", data);
-        mutations.SET_SPOTS(state, data, payload.test);
+        console.log("응답값 : ", res);
+        mutations.SER_CATEGORY(state, res);
       })
       .catch((err) => {
         console.log(err);

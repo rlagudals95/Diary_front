@@ -18,6 +18,11 @@
       ></b-form-textarea>
     </div>
 
+    <div class="mt-3">
+      <label>Category</label>
+      <b-form-select v-model="category" :options="category_list"></b-form-select>
+    </div>
+
     <div style="margin-top: 10px">
       <label>Desciption</label>
       <b-form-textarea
@@ -37,6 +42,7 @@
 <script>
 import axios from 'axios';
 import {config} from '../config';
+import {mapState} from 'vuex'
 //import Grammar from '../components/Grammar.vue'
 
 export default {
@@ -47,7 +53,8 @@ export default {
         title: "",
         content: "",
         isGrammar: false,
-        time: 10000
+        time: 10000,
+        category : '카테고리를 선택해 주세요'
       }
     },
     methods : {
@@ -62,13 +69,12 @@ export default {
           return
         }
 
-        console.log('param : ',this.title, this.content)
+        console.log('param : ',this.title, this.content, '/', this.category)
         axios.post(`${config.localUrl}/diary/post`,{
           title: this.title,
           content: this.content,
-          // headers : {
-          //   "Authorization": localStorage.getItem("Authorization")
-          // }
+          category: this.category,
+          keyword: '테스트'
         }).then((res)=> {
           console.log('게시물 작성 반응값 : ', res)
           this.$router.push('diaryView')
@@ -86,10 +92,19 @@ export default {
           this.$router.push('diaryView')
         }
         this.time--
+      },
+      getCategory (){
+        this.$store.dispatch('getCategory')
       }
+    },
+    computed : {
+      ...mapState({
+         category_list : state => state.user.category_list
+      })     
     },
     created() { 
       this.$store.dispatch('loginCheck') 
+      this.getCategory();
       setInterval(()=> {
         this.postTimer();
       },1000)
