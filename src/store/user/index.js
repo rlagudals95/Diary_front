@@ -6,6 +6,7 @@ import { mutations } from "./mutations";
 const state = {
   isLogin: false,
   username: "",
+  category_list : []
 };
 
 export const user = {

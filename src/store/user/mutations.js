@@ -2,6 +2,7 @@ import { config } from "../../config";
 
 const SET_SPOTS = "SET_SPOTS";
 const SET_LOGIN = "SET_LOGIN";
+const SET_CATEGORY = "SER_CATEGORY";
 
 export const mutations = {
   [SET_LOGIN](state, payload) {
@@ -18,6 +19,13 @@ export const mutations = {
         data[i].readyContent = "이미지 준비중입니다 :)";
       }
       state.spots.push(data[i]);
+    }
+  },
+  [SET_CATEGORY](state, payload) {
+    console.log("카테고리 데이터 들어옴", payload);
+    let data = payload.data;
+    for (let i = 0; i < data.length; i++) {
+      state.category_list.push(data[i].name);
     }
   },
 };
