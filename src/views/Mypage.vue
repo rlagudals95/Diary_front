@@ -1,14 +1,25 @@
 <template>
   <div class="mypage-container">
-      마이페이지
-      <input v-model="name" type="text">
-      <button @click="addCate">버튼</button>
+        <div class="mypage-title">MY KEYWORD</div>
+        <br>
+        <div class="meta-desc">
+         자신이 이루고자 하는 목표나 배우고 싶은 것을 카테고리로 설정해 보세요 :)<br>
+         모르는 것도 괜찮고 기억하고 싶은 것도 다 좋아요
+      </div>
+      <br>
+      <b-form-input v-model="name" placeholder="Enter your keyword"></b-form-input>
+      <b-button @click="addCate" class="mt-3" variant="dark">add keyword</b-button>
+      <div class="mt-5">
+        <div class="category mt-1" v-for="category in category_list" :key="category.category_no" >
+            {{category}}
+        </div>
+      </div>
   </div>
 </template>
-
 <script>
 import axios from 'axios'
 import {config} from '../config'
+import {mapState} from 'vuex'
 
 export default {
     data () {
@@ -28,8 +39,20 @@ export default {
             }).then((res)=> {
                 console.log('카테고리 추가 res : ', res)
             })
-        }
-    }
+        },
+        getCategory (){
+            this.$store.dispatch('getCategory')
+        },
+    },
+    created (){
+        this.getCategory();
+    },
+    computed : {
+      ...mapState({
+         category_list : state => state.user.category_list
+      })     
+    },
+
 }
 </script>
 
@@ -42,6 +65,11 @@ export default {
     top: 10%;
     left: 50%;
     transform: translate(-50%);
+  }
+
+  .mypage-title{
+    font-size: 7vw;
+    font-weight: bolder;
   }
 
   /* .timer-container {

@@ -1,6 +1,7 @@
 <template>
     <div class="main-container">
       <ScrollTop /> 
+        <WordCloud/>
         <div class="meta-title">메타인지</div>
         <div class="meta-eng">meta-cognition , Self reflection</div>
         <div class="meta-desc">
@@ -24,12 +25,14 @@ import axios from "axios";
 import {mapState} from 'vuex'
 import ScrollTop from '../components/ScrollTop.vue'
 import { config } from '../config'
+import WordCloud from '../components/WordCloud.vue'
 
 export default {
   name: "Home",
   components: { 
     //Card, InfiniteLoading, 
-    ScrollTop 
+    ScrollTop,
+    WordCloud
   },
   data () {
     return {
@@ -63,10 +66,12 @@ export default {
 
 <style lang='scss' scoped >
   .main-container {
+    //background-color: red;
     width: 80%;
     height: 100%;
     margin: 5rem auto 0px auto;
     align-items: center;
+    z-index: 1;
   }
 
   .meta-title{
@@ -87,7 +92,7 @@ export default {
 
   .keyword-container {
     padding : 20px 0px;
-    font-size: 4vw;
+    font-size: 3.5vw;
     width: 100%;
     overflow: scroll;
     height: 70vh;

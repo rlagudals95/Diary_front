@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <Navigation />
+    <div class="main-background"></div>
     <div id="nav">
       <!-- <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> -->
@@ -25,6 +26,17 @@ export default {
 </script>
 <style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
+.main-background{
+  background: url('https://images.unsplash.com/photo-1615800098779-1be32e60cca3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=710&q=80');
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -50;
+}
+
 
 #app {
   font-family: 'Noto Sans KR', sans-serif;
@@ -39,7 +51,7 @@ export default {
 
   a {
     font-weight: bold;
-    color: #2c3e50;
+    //color: #2c3e50;
 
     // &.router-link-exact-active {
     //   color: #42b983;
