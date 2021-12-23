@@ -2,6 +2,7 @@
   <div>
     <!-- {{s_diary_list}} -->
     <ScrollTop/>
+    <PostBtn/>
     <div class="diary-container">
         <div v-for="diary_card in s_diary_list" :key="diary_card.diary_no" >
             <DiaryCard @click="goDetail(diary_card.diary_no)" :diaryData="diary_card"/>
@@ -18,10 +19,11 @@ import DiaryCard from '../components/DiaryCard.vue'
 //import InfiniteLoading from "vue-infinite-loading";
 import ScrollTop from '../components/ScrollTop.vue'
 import { mapState } from 'vuex'
+import PostBtn from '../components/PostBtn.vue'
 
 export default {
     name: 'DiaryView',
-    components : { DiaryCard, ScrollTop } ,
+    components : { DiaryCard, ScrollTop, PostBtn } ,
     data() {
       return {
         isLoading: false ,

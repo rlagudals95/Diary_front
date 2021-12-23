@@ -34,7 +34,7 @@
       ></b-form-textarea>
     </div>
     <b-button type="" @click="goGrammar()" class="mt-3" variant="blue">맞춤법 검사하기</b-button>
-    <b-button type="" @click="submitDiary()" class="mt-3" variant="primary">POST</b-button>
+    <b-button type="" @click="submitDiary()" class="mt-3" variant="dark">POST</b-button>
   </div>
   
 </template>
