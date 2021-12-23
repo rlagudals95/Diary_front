@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="cloud-container">
       <wordcloud
       :data="defaultWords"
       nameKey="name"
@@ -62,9 +62,26 @@ export default {
         {
           "name": "play",
           "value": 6
+        },
+        {
+          "name": "play",
+          "value": 1
+        },
+        {
+          "name": "play",
+          "value": 6
+        },
+        {
+          "name": "play",
+          "value": 6
         }
       ]
     }
   }
 }
 </script>
+<style lang="scss" scoped>
+  .cloud-container{
+    
+  }
+</style>

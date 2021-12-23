@@ -10,8 +10,8 @@
       <b-form-input v-model="name" placeholder="Enter your keyword"></b-form-input>
       <b-button @click="addCate" class="mt-3" variant="dark">add keyword</b-button>
       <div class="mt-5">
-        <div class="category mt-1" v-for="category in category_list" :key="category.category_no" >
-            {{category}}
+        <div class="category-container mt-1" v-for="category in category_list" :key="category.category_no" >
+            {{category.name}} / {{category.create_date}}
         </div>
       </div>
   </div>
@@ -37,6 +37,7 @@ export default {
             axios.post(`${config.localUrl}/category/add`,{
                 name: this.name
             }).then((res)=> {
+                this.$store.commit('ADD_CATEGORY', res);
                 console.log('카테고리 추가 res : ', res)
             })
         },
@@ -57,7 +58,7 @@ export default {
 </script>
 
 <style>
-    .mypage-container {
+  .mypage-container {
     display: flex !important;
     flex-direction: column;
     width: 80%;
@@ -70,6 +71,10 @@ export default {
   .mypage-title{
     font-size: 7vw;
     font-weight: bolder;
+  }
+
+  .category-container{
+    font-size: 3vw
   }
 
   /* .timer-container {
