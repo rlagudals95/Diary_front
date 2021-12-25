@@ -1,5 +1,6 @@
 <template>
   <div class="mypage-container">
+        <WordCloud/>
         <div class="mypage-title">MY KEYWORD</div>
         <br>
         <div class="meta-desc">
@@ -8,8 +9,8 @@
       </div>
       <br>
       <b-form-input v-model="name" placeholder="Enter your keyword"></b-form-input>
-      <b-button @click="addCate" class="mt-3" variant="dark">add keyword</b-button>
-      <div class="mt-5">
+      <b-button @keyup.enter="addCate"  @click="addCate" class="mt-3" variant="dark">add keyword</b-button>
+      <div class="mt-2">
         <div class="category-container mt-1" v-for="category in category_list" :key="category.category_no" >
             {{category.name}} / {{category.create_date}}
         </div>
@@ -20,8 +21,10 @@
 import axios from 'axios'
 import {config} from '../config'
 import {mapState} from 'vuex'
+import WordCloud from '../components/WordCloud.vue'
 
 export default {
+    components: {WordCloud},
     data () {
         return {
             name: "",

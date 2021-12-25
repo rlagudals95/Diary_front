@@ -29,6 +29,7 @@ export default {
         isLoading: false ,
         page: 0,
         size: 12,
+        flag: false
       }
     },
     methods : {
@@ -41,10 +42,7 @@ export default {
                if(res.data.length){
 
                   this.$store.commit('SET_DIARY_LIST', res);
-
-                  // for (let i = 0; i < _data.length; i++){
-                  //   this.diary_list.push(_data[i]);
-                  // }    
+  
                   this.page += 12;
                   $state.loaded(); 
                   if (this.s_diary_list.length/12 == 0){

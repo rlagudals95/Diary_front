@@ -2,25 +2,32 @@
   <div class="diary-upload-container">
     <!-- <Grammar/> -->
     <div class="timer-container">
-      <label>TIME</label>
+      <!-- <label>TIME</label> -->
       <div>{{this.time}}</div>
+      <div class="time-info">초 후에 제출됩니다 :)</div>
     </div>
 
     <div>
       <label>Title</label>
-      <b-form-textarea
+      <b-form-input
         id="textarea-rows"
         placeholder="Enter enything you do"
         rows="1"
         v-model="title"
         required
         max-rows="1"
-      ></b-form-textarea>
+      ></b-form-input>
     </div>
 
     <div class="mt-3">
       <label>Category</label>
-      <b-form-select v-model="category" :options="category_list"></b-form-select>
+      <!-- {{this.category_list}} -->
+      
+      <b-form-select v-model="category_no" aria-placeholder="카테고리를 선택해 주세요!">
+        <option class="category-container mt-1" :value="category.category_no" v-for="category in category_list" :key="category.category_no" >
+          {{category.name}} / {{category.create_date}}
+        </option>
+      </b-form-select>
     </div>
 
     <div style="margin-top: 10px">
@@ -28,7 +35,7 @@
       <b-form-textarea
         id="textarea-rows"
         placeholder="Enter enything you do"
-        rows="10"
+        rows="7"
         v-model="content"
         required
       ></b-form-textarea>
@@ -54,7 +61,7 @@ export default {
         content: "",
         isGrammar: false,
         time: 10000,
-        category : '카테고리를 선택해 주세요'
+        category_no : null
       }
     },
     methods : {
@@ -69,11 +76,12 @@ export default {
           return
         }
 
-        console.log('param : ',this.title, this.content, '/', this.category)
+        console.log('param : ',this.title, this.content, '/', this.category_no)
+        
         axios.post(`${config.localUrl}/diary/post`,{
           title: this.title,
           content: this.content,
-          category: this.category,
+          category_no: this.category_no,
           keyword: '테스트'
         }).then((res)=> {
           console.log('게시물 작성 반응값 : ', res)
@@ -118,6 +126,7 @@ export default {
     display: flex !important;
     flex-direction: column;
     width: 80%;
+    height: 100%;
     position: absolute;
     top: 10%;
     left: 50%;
@@ -125,7 +134,12 @@ export default {
   }
 
   .timer-container {
-    font-size: 5rem;
-    margin-bottom: 3rem;
+    font-size: 10vw;
+    margin-bottom: 3vw;
+  }
+
+  .time-info {
+    font-size: 2.5vw;
+    opacity: 0.8;
   }
 </style>
