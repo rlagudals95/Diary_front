@@ -23,12 +23,27 @@
       <label>Category</label>
       <!-- {{this.category_list}} -->
       
-      <b-form-select v-model="category_no" aria-placeholder="카테고리를 선택해 주세요!">
+      <b-form-select v-model="category_no" aria-placeholder="">
+        <option class="category-container" value="" selected>카테고리를 선택해 주세요!</option>
         <option class="category-container mt-1" :value="category.category_no" v-for="category in category_list" :key="category.category_no" >
           {{category.name}} / {{category.create_date}}
         </option>
       </b-form-select>
     </div>
+
+    <div>
+      <label>score</label>
+      <b-form-input
+        id="textarea-rows"
+        placeholder="Enter score for your goal"
+        rows="1"
+        v-model="score"
+        required
+        max= "100"
+        max-rows="1"
+      ></b-form-input>
+    </div>
+
 
     <div style="margin-top: 10px">
       <label>Desciption</label>
@@ -61,15 +76,16 @@ export default {
         content: "",
         isGrammar: false,
         time: 10000,
-        category_no : null
+        category_no : null,
+        score: 0
       }
     },
     methods : {
       submitDiary (){
-        if (!this.isGrammar){
-          alert('맞춤법 검사하고 붙여 넣어주세요!')
-          return
-        }
+        // if (!this.isGrammar){
+        //   alert('맞춤법 검사하고 붙여 넣어주세요!')
+        //   return
+        // }
 
         if (!this.title || !this.content){
           alert('내용을 모두 채워넣어 주세요!')
@@ -82,7 +98,9 @@ export default {
           title: this.title,
           content: this.content,
           category_no: this.category_no,
-          keyword: '테스트'
+          keyword: '테스트',
+          complete_yn : 'N',
+          score: this.score
         }).then((res)=> {
           console.log('게시물 작성 반응값 : ', res)
           this.$router.push('diaryView')

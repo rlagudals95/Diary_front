@@ -42,6 +42,7 @@ export default {
             }).then((res)=> {
                 this.$store.commit('ADD_CATEGORY', res);
                 console.log('카테고리 추가 res : ', res)
+                this.name = "";
             })
         },
         getCategory (){
@@ -69,6 +70,7 @@ export default {
     top: 10%;
     left: 50%;
     transform: translate(-50%);
+    padding-bottom: 5vw;
   }
 
   .mypage-title{
