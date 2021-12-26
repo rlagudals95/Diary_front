@@ -1,5 +1,6 @@
 const SET_DIARY_LIST = "SET_DIARY_LIST";
 const SET_KEYWORD = "SET_KEYWORD";
+const SET_DIARY_DETAIL = "SET_DIARY_DETAIL";
 
 export const mutations = {
   [SET_DIARY_LIST](state, payload) {
@@ -24,4 +25,9 @@ export const mutations = {
   [SET_KEYWORD](state, payload) {
     state.keyword = payload.data;
   },
+  [SET_DIARY_DETAIL](state, payload) {
+    console.log('다이어리 디테일 : ', payload);
+    state.diary_detail = payload.data;
+  },
+
 };

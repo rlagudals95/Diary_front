@@ -4,6 +4,7 @@ import { mutations } from "./mutations";
 
 const state = {
   diary_list : [],
+  diary_detail: null,
   keyword : "" 
 };
 

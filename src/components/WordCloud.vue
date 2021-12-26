@@ -6,7 +6,8 @@
       valueKey="value"
       :color="myColors"
       :showTooltip="true"
-      :wordClick="wordClickHandler">
+      :wordClick="wordClickHandler"
+      :fontSize="[85,200]">
       </wordcloud>
       <!-- <div>{{this.word_cloud_list}}</div>  -->
   </div>
