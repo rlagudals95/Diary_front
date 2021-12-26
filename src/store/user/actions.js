@@ -9,6 +9,7 @@ export const actions = {
       .then((res) => {
         console.log("응답값 : ", res);
         mutations.SER_CATEGORY(state, res);
+        //mutations.SET_WORD_CLOUD(state, res);
       })
       .catch((err) => {
         console.log(err);

@@ -8,7 +8,7 @@
       :showTooltip="true"
       :wordClick="wordClickHandler">
       </wordcloud>
-      <div>{{this.category_list}}</div>   
+      <!-- <div>{{this.word_cloud_list}}</div>  -->
   </div>
 </template>
 
@@ -27,86 +27,18 @@ export default {
     }
   },
   created () {
-    this.defaultWords = this.testWord
+    this.defaultWords = this.word_cloud_list
   },
   computed : {
     ...mapState({
-        category_list : state => state.user.category_list
+        category_list : state => state.user.category_list,
+        word_cloud_list : state => state.user.word_cloud_list
     })     
   },
   data() {
     return {
-      testWord :[
-        {
-          "name": "test1",
-          "value": 55
-        },
-        {
-          "name": "test2",
-          "value": 10
-        },
-        {
-          "name": "test3",
-          "value": 33
-        },
-        {
-          "name": "test4",
-          "value": 45
-        },
-
-      ],
       myColors: ['#1f77b4', '#629fc9', '#94bedb', '#c9e0ef'],
-      defaultWords: ""
-      // [
-      //   {
-      //     "name": "Cat",
-      //     "value": 26
-      //   },
-      //   {
-      //     "name": "fish",
-      //     "value": 19
-      //   },
-      //   {
-      //     "name": "things",
-      //     "value": 18
-      //   },
-      //   {
-      //     "name": "look",
-      //     "value": 16
-      //   },
-      //   {
-      //     "name": "two",
-      //     "value": 15
-      //   },
-      //   {
-      //     "name": "fun",
-      //     "value": 9
-      //   },
-      //   {
-      //     "name": "know",
-      //     "value": 9
-      //   },
-      //   {
-      //     "name": "good",
-      //     "value": 9
-      //   },
-      //   {
-      //     "name": "play",
-      //     "value": 6
-      //   },
-      //   {
-      //     "name": "play",
-      //     "value": 1
-      //   },
-      //   {
-      //     "name": "play",
-      //     "value": 6
-      //   },
-      //   {
-      //     "name": "play",
-      //     "value": 6
-      //   }
-      // ]
+      defaultWords: []
     }
   },
   
@@ -114,6 +46,6 @@ export default {
 </script>
 <style lang="scss" scoped>
   .cloud-container{
-    
+  
   }
 </style>

@@ -10,9 +10,10 @@
       <br>
       <b-form-input v-model="name" placeholder="Enter your keyword"></b-form-input>
       <b-button @keyup.enter="addCate"  @click="addCate" class="mt-3" variant="dark">add keyword</b-button>
-      <div class="mt-2">
-        <div class="category-container mt-1" v-for="category in category_list" :key="category.category_no" >
-            {{category.name}} / {{category.create_date}}
+      <div class="mt-2">   
+        <div class="category-container mt-3" v-for="category in category_list" :key="category.category_no" >
+             <hr/>
+             {{category.name}} / 진행률 : {{category.progress}} / 목표설정일시 : {{category.create_date}}
         </div>
       </div>
   </div>

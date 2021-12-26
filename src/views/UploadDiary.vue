@@ -26,13 +26,13 @@
       <b-form-select v-model="category_no" aria-placeholder="">
         <option class="category-container" value="" selected>카테고리를 선택해 주세요!</option>
         <option class="category-container mt-1" :value="category.category_no" v-for="category in category_list" :key="category.category_no" >
-          {{category.name}} / {{category.create_date}}
+          {{category.name}} / 진행률 : {{category.progress}} / 목표설정일시 : {{category.create_date}}
         </option>
       </b-form-select>
     </div>
 
-    <div>
-      <label>score</label>
+    <div class="mt-3">
+      <label>Score</label>
       <b-form-input
         id="textarea-rows"
         placeholder="Enter score for your goal"
