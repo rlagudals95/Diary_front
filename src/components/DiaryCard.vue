@@ -46,6 +46,7 @@ export default {
           })
         },
         goDetail (diary_no) {
+          console.log('다이어리 번호 : ',diary_no)
           this.$store.dispatch("getDetail", diary_no)
           this.$router.push('/diaryDetail');
         }
