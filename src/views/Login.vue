@@ -60,10 +60,12 @@ export default {
           password: this.form.password,
         })
         .then((res) => {
-          console.log("로그인 정보 :", res);
+          console.log("로그인 정보 :",res);
           if (res.status == 200) {
             console.log("로그인 성공");
             localStorage.setItem("Authorization", res.headers.authorization);
+            axios.defaults.headers.common['Authorization'] = localStorage.getItem('Authorization');
+            this.$store.commit("SET_LOGIN",res);
             this.$router.push("/");
           }
         });
