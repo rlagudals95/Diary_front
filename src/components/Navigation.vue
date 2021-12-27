@@ -6,15 +6,18 @@
         <b-nav-item @click="goDiary()" :class="{'nav-down' : navDown}">Diary</b-nav-item>
         <b-nav-item v-if="isLogin" @click="goMypage()" :class="{'nav-down' : navDown}">MyPage</b-nav-item>
         <b-nav-item v-else @click="goLogin()" :class="{'nav-down' : navDown}">Login</b-nav-item>
+        <b-nav-item v-show="isLogin" @click="goLogOut()" :class="{'nav-down' : navDown}">Logout</b-nav-item>
     </b-nav>
 </div>
 </template>
 <script>
+import { mapState } from 'vuex';
+
 export default {
     name: "Navigation",
     data () {
         return {
-            isLogin : localStorage.getItem("Authorization"),
+            // isLogin : localStorage.getItem("Authorization"),
             navDown: false,
             lastScrollPosition: 0
         }
@@ -51,11 +54,17 @@ export default {
     },
     mounted (){
         window.addEventListener('scroll', this.onScroll)
+        this.$store.commit('LOGIN_CHK')
         //console.log('로그인 데이터 : ',this.isLogin);
     },
     beforeDestroy () {
         window.removeEventListener('scroll', this.onScroll)
-    }
+    },
+    computed : {
+        ...mapState({
+        isLogin : state => state.user.isLogin,
+    })     
+  },
   
 }
 </script>
@@ -69,7 +78,7 @@ export default {
     margin: 0px auto;
     padding: 20px;
     width: 100%;
-    z-index: 5000;
+    z-index: 50;
     font-weight: bold;
     transform: translate3d(0, 0, 0);
     transition: 0.1s all ease-out;

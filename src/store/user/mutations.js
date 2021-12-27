@@ -5,11 +5,19 @@ const SET_LOGIN = "SET_LOGIN";
 const SET_CATEGORY = "SER_CATEGORY";
 const ADD_CATEGORY = "ADD_CATEGORY";
 const SET_WORD_CLOUD = "SET_WORD_CLOUD";
+const LOGIN_CHK = "LOGIN_CHK";
 
 export const mutations = {
   [SET_LOGIN](state, payload) {
+    console.log('접속유저정보:',payload)
     state.isLogin = true;
     state.username = payload;
+  },
+  [LOGIN_CHK](state, payload) {
+    if (localStorage.getItem('Authorization')){
+      state.isLogin = true;
+      state.username = payload;
+    }
   },
 
   [SET_SPOTS](state, payload) {
