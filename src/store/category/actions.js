@@ -4,14 +4,13 @@ import { config } from "../../config";
 import { mutations } from "../diary/mutations";
 
 export const actions = {
-  getDetail({state}, payload) {
-    console.log("diary_no : ",payload );
+  getCategoryDetail({ state }, payload) {
+    console.log("카테고리_no : ", payload);
     axios
-      .post(`${config.localUrl}/diary/detail/${payload}`)
+      .post(`${config.localUrl}/category/view/${payload}`)
       .then((res) => {
-        console.log("응답값 : ", res);
-        mutations.SET_DIARY_DETAIL(state, res)
-        
+        console.log("카테고리 상세 응답값 : ", res);
+        mutations.SET_CATEGORY_DETAIL(state, res);
       })
       .catch((err) => {
         console.log(err);

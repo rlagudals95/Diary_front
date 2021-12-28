@@ -3,7 +3,7 @@
     <b-button v-b-modal.modal-1>Launch demo modal</b-button>
 
     <b-modal id="modal-1" title="BootstrapVue">
-        <p class="my-4">{{this.edit_category}}</p>
+        <p class="my-4">dd{{this.category_detail}}</p>
     </b-modal>
   </div>
 </template>
@@ -15,7 +15,7 @@ export default {
     name: 'Modal',
      computed : {
     ...mapState({
-        edit_category : state => state.category.edit_category
+        category_detail : state => state.category.category_detail
     })     
   },
 }

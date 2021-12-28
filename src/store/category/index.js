@@ -3,7 +3,7 @@ import { actions } from "./actions";
 import { mutations } from "./mutations";
 
 const state = {
-  edit_category : null
+  category_detail: null,
 };
 
 export const category = {

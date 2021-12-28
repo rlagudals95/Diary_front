@@ -56,7 +56,7 @@ export default {
     computed : {
       ...mapState({
          category_list : state => state.user.category_list,
-         edit_category : state => state.category.edit_category,
+         category_detail : state => state.category.category_detail,
       })     
     },
 
