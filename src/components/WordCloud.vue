@@ -11,12 +11,21 @@
       v-b-modal.modal-1
     >
     </wordcloud>
+
+    <div class="modal-container">
+      <b-modal id="modal-1" :title="category_detail.name">
+          <p class="my-4">{{category_detail.progress}}</p>
+          <p class="my-4">{{category_detail.create_date}}</p>
+      </b-modal>
+    </div>
   </div>
+
 </template>
 
 <script>
 import wordcloud from "vue-wordcloud";
 import { mapState } from "vuex";
+
 export default {
   name: "WordCloud",
   components: {
@@ -25,7 +34,7 @@ export default {
   },
   methods: {
     wordClickHandler(name, value) {
-      console.log("wordClickHandler", name, value);
+      //console.log("wordClickHandler", name, value);
       this.$store.dispatch('getCategoryDetail', value);
       //this.$store.commit("EDIT_CATEGORY", category_info);
     },
