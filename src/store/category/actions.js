@@ -1,7 +1,7 @@
 import axios from "axios";
 //import { mutations } from "./mutations";
 import { config } from "../../config";
-import { mutations } from "../diary/mutations";
+import { mutations } from './mutations'
 
 export const actions = {
   getCategoryDetail({ state }, payload) {
