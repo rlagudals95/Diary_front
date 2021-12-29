@@ -32,6 +32,12 @@
     </div>
 
     <div class="mt-3">
+      <label>Image</label>
+      <FileUpload/>
+      <!-- {{upload_img}} -->
+    </div>
+
+    <div class="mt-3">
       <label>Score</label>
       <b-form-input
         id="textarea-rows"
@@ -65,11 +71,12 @@
 import axios from 'axios';
 import {config} from '../config';
 import {mapState} from 'vuex'
+import FileUpload from '../components/FileUpload.vue'
 //import Grammar from '../components/Grammar.vue'
 
 export default {
     name: 'UploadDiary',
-    components : {},
+    components : {FileUpload},
     data () {
       return {
         title: "",
@@ -86,21 +93,43 @@ export default {
         //   alert('맞춤법 검사하고 붙여 넣어주세요!')
         //   return
         // }
-
+        console.log('이미지 확인 : ',this.upload_img)
         if (!this.title || !this.content){
           alert('내용을 모두 채워넣어 주세요!')
           return
         }
 
         console.log('param : ',this.title, this.content, '/', this.category_no)
-        
-        axios.post(`${config.localUrl}/diary/post`,{
-          title: this.title,
-          content: this.content,
-          category_no: this.category_no,
-          keyword: '테스트',
-          complete_yn : 'N',
-          score: this.score
+       
+        // let _data = {
+        //   title: this.title,
+        //   content: this.content,
+        //   category_no: this.category_no,
+        //   keyword: '테스트',
+        //   complete_yn : 'N',
+        //   score: this.score
+        // }
+        // console.log(_data)
+
+        const formData = new FormData();
+        let data = [
+          {title: this.title},
+          {content: this.content},
+          {category_no: this.category_no},
+          {keyword: '테스트'},
+          {complete_yn : 'N'},
+          {score: this.score},
+          {image: this.upload_img}
+        ]
+
+        for (let i = 0; i < data.length; i++){
+          formData.append(data[i])
+        }
+
+        axios.post(`${config.localUrl}/diary/post/test`, formData,{
+          headers: { 
+            'Content-Type': 'multipart/form-data' 
+          }
         }).then((res)=> {
           console.log('게시물 작성 반응값 : ', res)
           this.$router.push('diaryView')
@@ -125,7 +154,8 @@ export default {
     },
     computed : {
       ...mapState({
-         category_list : state => state.user.category_list
+         category_list : state => state.user.category_list,
+         upload_img: state => state.diary.upload_img
       })     
     },
     created() { 
