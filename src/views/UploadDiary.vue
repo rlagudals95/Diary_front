@@ -34,7 +34,7 @@
     <div class="mt-3">
       <label>Image</label>
       <FileUpload/>
-      <!-- {{upload_img}} -->
+      {{upload_img}} 
     </div>
 
     <div class="mt-3">
@@ -45,6 +45,7 @@
         rows="1"
         v-model="score"
         required
+        max-length = "2"
         max= "100"
         max-rows="1"
       ></b-form-input>
@@ -100,33 +101,43 @@ export default {
         }
 
         console.log('param : ',this.title, this.content, '/', this.category_no)
-       
-        // let _data = {
-        //   title: this.title,
-        //   content: this.content,
-        //   category_no: this.category_no,
-        //   keyword: '테스트',
-        //   complete_yn : 'N',
-        //   score: this.score
-        // }
-        // console.log(_data)
-
         const formData = new FormData();
-        let data = [
-          {title: this.title},
-          {content: this.content},
-          {category_no: this.category_no},
-          {keyword: '테스트'},
-          {complete_yn : 'N'},
-          {score: this.score},
-          {image: this.upload_img}
-        ]
-
-        for (let i = 0; i < data.length; i++){
-          formData.append(data[i])
+        formData.append('title', this.title);
+        formData.append('content', this.content);
+        formData.append('category_no', this.category_no);
+        formData.append('keyword', this.keyword);
+        formData.append('complete_yn', this.complete_yn);
+        formData.append('image_file', this.upload_img);
+        
+        let _data = {
+          title: this.title,
+          content: this.content,
+          category_no: this.category_no,
+          keyword: '테스트',
+          complete_yn : 'N',
+          score: this.score,
+          image_file: formData
         }
 
-        axios.post(`${config.localUrl}/diary/post/test`, formData,{
+
+        console.log(formData)
+
+        // const formData = new FormData();
+        // let data = [
+        //   {title: this.title},
+        //   {content: this.content},
+        //   {category_no: this.category_no},
+        //   {keyword: '테스트'},
+        //   {complete_yn : 'N'},
+        //   {score: this.score},
+        //   {image: this.upload_img}
+        // ]
+
+        // for (let i = 0; i < data.length; i++){
+        //   formData.append(data[i])
+        // }
+
+        axios.post(`${config.localUrl}/diary/post/test`, formData, {
           headers: { 
             'Content-Type': 'multipart/form-data' 
           }
