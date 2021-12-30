@@ -117,7 +117,7 @@ export default {
           keyword: '테스트',
           complete_yn : 'N',
           score: this.score,
-          image_file: formData
+          file: formData
         }
 
 
@@ -138,9 +138,9 @@ export default {
         //   formData.append(data[i])
         // }
 
-        axios.post(`${config.localUrl}/diary/post/test`, formData, {
+        axios.post(`${config.localUrl}/diary/post`, _data, {
           headers: { 
-            'Content-Type': 'multipart/form-data' 
+           // 'Content-Type': 'multipart/form-data' 
           }
         }).then((res)=> {
           console.log('게시물 작성 반응값 : ', res)
