@@ -107,8 +107,9 @@ export default {
         formData.append('category_no', this.category_no);
         formData.append('keyword', this.keyword);
         formData.append('complete_yn', this.complete_yn);
-        formData.append('image_file', this.upload_img);
-        
+        //formData.append('image_file', this.upload_img);
+        Object.values(this.upload_img).forEach((file) => formData.append("file", file));
+
         let _data = {
           title: this.title,
           content: this.content,
@@ -143,7 +144,7 @@ export default {
           }
         }).then((res)=> {
           console.log('게시물 작성 반응값 : ', res)
-          this.$router.push('diaryView')
+          //this.$router.push('diaryView')
         })
       },
       goGrammar (){
