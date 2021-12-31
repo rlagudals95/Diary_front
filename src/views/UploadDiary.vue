@@ -105,42 +105,15 @@ export default {
         formData.append('title', this.title);
         formData.append('content', this.content);
         formData.append('category_no', this.category_no);
+        formData.append('score', this.score);
         formData.append('keyword', this.keyword);
         formData.append('complete_yn', this.complete_yn);
-        //formData.append('image_file', this.upload_img);
         Object.values(this.upload_img).forEach((file) => formData.append("file", file));
 
-        let _data = {
-          title: this.title,
-          content: this.content,
-          category_no: this.category_no,
-          keyword: '테스트',
-          complete_yn : 'N',
-          score: this.score,
-          file: formData
-        }
-
-
-        console.log(formData)
-
-        // const formData = new FormData();
-        // let data = [
-        //   {title: this.title},
-        //   {content: this.content},
-        //   {category_no: this.category_no},
-        //   {keyword: '테스트'},
-        //   {complete_yn : 'N'},
-        //   {score: this.score},
-        //   {image: this.upload_img}
-        // ]
-
-        // for (let i = 0; i < data.length; i++){
-        //   formData.append(data[i])
-        // }
-
-        axios.post(`${config.localUrl}/diary/post`, _data, {
+  
+        axios.post(`${config.localUrl}/diary/post`, formData, {
           headers: { 
-           // 'Content-Type': 'multipart/form-data' 
+            'Content-Type': 'multipart/form-data' 
           }
         }).then((res)=> {
           console.log('게시물 작성 반응값 : ', res)
