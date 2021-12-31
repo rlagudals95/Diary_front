@@ -14,6 +14,7 @@ import {
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import "mdb-vue-ui-kit/css/mdb.min.css";
+//import '@/plugins/firebase'
 
 Vue.config.productionTip = false;
 Vue.use(BootstrapVue);
