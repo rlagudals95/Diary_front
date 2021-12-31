@@ -1,7 +1,7 @@
 <template>
   <div class="card-container"  @click="goDetail(diaryData.diary_no)">
     <div class="card">
-        <img class="card-img" src="https://images.pexels.com/photos/2825240/pexels-photo-2825240.jpeg?cs=srgb&dl=pexels-david-bartus-2825240.jpg&fm=jpg"  alt="">  
+        <img class="card-img" :src="diaryData.image_url"  alt="">  
         <span class="hover">
             <div class="hover-title">{{diaryData.title}}</div>
             <div class="font-wrap">
