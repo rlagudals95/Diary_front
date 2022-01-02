@@ -117,7 +117,7 @@ export default {
           }
         }).then((res)=> {
           console.log('게시물 작성 반응값 : ', res)
-          //this.$router.push('diaryView')
+          this.$router.push('diaryView')
         })
       },
       goGrammar (){

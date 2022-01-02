@@ -10,6 +10,10 @@ export const mutations = {
     console.log(data, "/", payload.length);
 
     for (let i = 0; i < data.length; i++) {
+      if (!data[i].image_url) {
+        data[i].image_url =
+          "https://images.unsplash.com/photo-1509475826633-fed577a2c71b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80";
+      }
       state.diary_list.push(data[i]);
     }
 
