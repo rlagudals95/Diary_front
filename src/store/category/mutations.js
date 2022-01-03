@@ -2,6 +2,7 @@
 const SET_CATEGORY_DETAIL = "SET_CATEGORY_DETAIL";
 const SET_CATEGORY = "SET_CATEGORY";
 const ADD_CATEGORY = "ADD_CATEGORY";
+const COMPLETE_CATEGORY = "COMPLETE_CATEGORY";
 
 export const mutations = {
   [SET_CATEGORY_DETAIL](state, payload) {
@@ -55,5 +56,13 @@ export const mutations = {
       value: data.progress,
       category_no: data.category_no,
     });
+  },
+  [COMPLETE_CATEGORY](state, payload) {
+    console.log("카테고리 더하기", payload);
+    let category_list = state.category_list;
+
+    for (let i = 0; i < category_list.length; i++){
+      if(category_list[i].category_no == payload) category_list[i].complete_yn = 'Y'
+    }
   },
 };

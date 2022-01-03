@@ -31,4 +31,14 @@ export const actions = {
         console.log(err);
       });
   },
+  completeCategory({state}, payload) {
+    axios.post(`${config.localUrl}/category/complete/${payload}`, {   
+    }).then((res) => {
+      console.log(res)
+      mutations.COMPLETE_CATEGORY(state, payload)
+    }).catch((err)=> {
+      alert('카테고리 삭제에러')
+      console.log(err)
+    })
+  }
 };
