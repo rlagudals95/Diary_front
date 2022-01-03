@@ -10,7 +10,11 @@
       <br>
       <b-form-input v-model="name" placeholder="Enter your keyword"></b-form-input>
       <b-button @keyup.enter="addCate"  @click="addCate" class="mt-3" variant="dark">add keyword</b-button>
+      <br />
       <div class="mt-2">   
+        <div class="com-yn-btn mt-3"></div>
+        <b-button @click="complete_yn('N')" variant="light">진행중인 목표</b-button>
+        <b-button @click="complete_yn('Y')" variant="dark">완료된 목표</b-button>
         <div class="category-container mt-3" v-for="category in category_list" :key="category.category_no" >
              <hr/>
              {{category.name}} / 진행률 : {{category.progress}} / 목표설정일시 : {{category.create_date}}
@@ -47,15 +51,19 @@ export default {
             })
         },
         getCategory (){
-            this.$store.dispatch('getCategory')
+            this.$store.dispatch('getCategory', 'N')
         },
+        complete_yn (yn){
+          console.log(yn);
+          this.$store.dispatch('getCategory', yn)
+        }
     },
     created (){
         this.getCategory();
     },
     computed : {
       ...mapState({
-         category_list : state => state.user.category_list,
+         category_list : state => state.category.category_list,
          category_detail : state => state.category.category_detail,
       })     
     },
@@ -81,7 +89,11 @@ export default {
   }
 
   .category-container{
-    font-size: 3vw
+    font-size: 2vw
+  }
+
+  .com-yn-btn {
+
   }
 
   /* .timer-container {

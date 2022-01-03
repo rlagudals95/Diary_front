@@ -85,7 +85,7 @@ export default {
         isGrammar: false,
         time: 10000,
         category_no : null,
-        score: 0
+        score: 1
       }
     },
     methods : {

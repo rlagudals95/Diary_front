@@ -25,7 +25,6 @@ Vue.use(global);
 Vue.component("BIcon", BIcon);
 Vue.component("BIconArrowUp", BIconArrowUp);
 
-
 new Vue({
   router,
   store,

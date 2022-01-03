@@ -40,7 +40,7 @@ export default {
            }).then(res => {
              setTimeout(()=> {
                if(res.data.length){
-
+                  console.log('반응테스트',res.data)
                   this.$store.commit('SET_DIARY_LIST', res);
   
                   this.page += 12;
