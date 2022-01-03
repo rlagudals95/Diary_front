@@ -1,7 +1,7 @@
 //const EDIT_CATEGORY = "EDIT_CATEGORY";
 const SET_CATEGORY_DETAIL = "SET_CATEGORY_DETAIL";
 const SET_CATEGORY = "SET_CATEGORY";
-const SET_COMPLETE_YN = "SET_COMPLETE_YN";
+const ADD_CATEGORY = "ADD_CATEGORY";
 
 export const mutations = {
   [SET_CATEGORY_DETAIL](state, payload) {
@@ -11,10 +11,10 @@ export const mutations = {
   [SET_CATEGORY](state, payload) {
     console.log("카테고리 데이터 들어옴", payload);
     let data = payload.data;
-    for (let i = 0; i < data.length; i++) {
-      state.category_list.push(data[i]);
-    }
-
+    // for (let i = 0; i < data.length; i++) {
+    //   state.category_list.push(data[i]);
+    // }
+    state.category_list = data;
     state.category_list = state.category_list.reduce((acc, cur) => {
       if (acc.findIndex((a) => a.category_no === cur.category_no) === -1) {
         return [...acc, cur]; //같은 id를 가진 게시물이 없다면 기존 포스트들과 새로받은 포스트 리턴
@@ -45,19 +45,15 @@ export const mutations = {
       }
     }, []);
   },
-  // [SET_COMPLETE_YN](state, payload) {
-  //   let category_list = state.category_list;
-  //   console.log('완료여부', payload)
-  //   let _category_list = [];
-  //   for (let i = 0; i < category_list.length; i++){
-  //     if(category_list[i].complete_yn == payload){
-  //       _category_list.push(category_list[i])
-  //     }
-  //   }
 
-  //   state.category_list = _category_list;
-
-  //   console.log('필터 후 : ',state.category_list)
-  // },
-
+  [ADD_CATEGORY](state, payload) {
+    console.log("카테고리 더하기", payload);
+    let data = payload.data;
+    state.category_list.unshift(data);
+    state.word_cloud_list.unshift({
+      name: data.name,
+      value: data.progress,
+      category_no: data.category_no,
+    });
+  },
 };

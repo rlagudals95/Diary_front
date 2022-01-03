@@ -17,7 +17,7 @@
 export default {
   data() {
       return {
-        previewImage: 'https://lh3.googleusercontent.com/proxy/kBqLgPghn1PopbMW8YfJvGiVR9-EAc5zIri6IhidIyvRe3PRYwa1Q9UX9vZLOkjBMbsFr7KnI2d5lLdofMJWFMEcLF3p_9o3vvlsM6B8vatuSUITWVnolW4_wY04c2Y',
+        previewImage: 'https://lh3.googleusercontent.com/proxy/82wwiIXbVXHzBVE_Cvkt1rU25sOZvnFikxXeJ6PkD5MwKitJ2a1m2n3LllDw_L2GNoz7qeOdVNZazwDn528MEPXTo3Ll6rv0JfpYFtuX0H3AmvDqWdAblpADjRzNtOM',
         uploadFile: null
       };
     },

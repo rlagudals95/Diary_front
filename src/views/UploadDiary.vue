@@ -34,7 +34,7 @@
     <div class="mt-3">
       <label>Image</label>
       <FileUpload/>
-      {{upload_img}} 
+      <!-- {{upload_img}}  -->
     </div>
 
     <div class="mt-3">
@@ -134,12 +134,12 @@ export default {
         this.time--
       },
       getCategory (){
-        this.$store.dispatch('getCategory')
+        this.$store.dispatch('getCategory', 'N')
       }
     },
     computed : {
       ...mapState({
-         category_list : state => state.user.category_list,
+         category_list : state => state.category.category_list,
          upload_img: state => state.diary.upload_img
       })     
     },

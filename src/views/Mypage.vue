@@ -5,7 +5,8 @@
         <br>
         <div class="meta-desc">
          자신이 이루고자 하는 목표나 배우고 싶은 것을 카테고리로 설정해 보세요 :)<br>
-         모르는 것도 괜찮고 기억하고 싶은 것도 다 좋아요
+         모르는 것도 괜찮고 기억하고 싶은 것도 다 좋아요<br>
+         진행률이 100 이상이 되면 완료됩니다.
       </div>
       <br>
       <b-form-input v-model="name" placeholder="Enter your keyword"></b-form-input>
@@ -13,11 +14,12 @@
       <br />
       <div class="mt-2">   
         <div class="com-yn-btn mt-3"></div>
-        <b-button @click="complete_yn('N')" variant="light">진행중인 목표</b-button>
-        <b-button @click="complete_yn('Y')" variant="dark">완료된 목표</b-button>
+        <b-button @click="getCategory('N')" variant="light">진행중인 목표</b-button>
+        <b-button @click="getCategory('Y')" variant="dark">완료된 목표</b-button>
         <div class="category-container mt-3" v-for="category in category_list" :key="category.category_no" >
              <hr/>
              {{category.name}} / 진행률 : {{category.progress}} / 목표설정일시 : {{category.create_date}}
+             <b-progress class="mt-3" height="7px" :value="category.progress"></b-progress>
         </div>
       </div>
   </div>
@@ -50,13 +52,10 @@ export default {
                 this.name = "";
             })
         },
-        getCategory (){
-            this.$store.dispatch('getCategory', 'N')
+        getCategory (yn){
+            if (!yn) yn = 'N';
+            this.$store.dispatch('getCategory', yn)
         },
-        complete_yn (yn){
-          console.log(yn);
-          this.$store.dispatch('getCategory', yn)
-        }
     },
     created (){
         this.getCategory();

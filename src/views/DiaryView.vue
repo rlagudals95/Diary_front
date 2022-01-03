@@ -72,6 +72,7 @@ export default {
 
 <style lang="scss" scoped>
   .diary-container {
+    padding:70px 10px 0px 10px ;
     padding-top: 70px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
