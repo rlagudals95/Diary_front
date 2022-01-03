@@ -20,6 +20,7 @@
              <hr/>
              {{category.name}} / 진행률 : {{category.progress}} / 목표설정일시 : {{category.create_date}}
              <b-progress class="mt-3" height="7px" :value="category.progress"></b-progress>
+             <b-button v-show =" category.complete_yn == 'N' " class="mt-3 complete_btn" @click="completeCategory(category.category_no)" variant="light">완료처리하기</b-button>
         </div>
       </div>
   </div>
@@ -56,6 +57,9 @@ export default {
             if (!yn) yn = 'N';
             this.$store.dispatch('getCategory', yn)
         },
+        completeCategory (category_no) {
+          this.$store.dispatch('completeCategory', category_no)
+        }
     },
     created (){
         this.getCategory();
@@ -91,7 +95,7 @@ export default {
     font-size: 2vw
   }
 
-  .com-yn-btn {
+  .complete_btn {
 
   }
 
