@@ -16,4 +16,19 @@ export const actions = {
         console.log(err);
       });
   },
+  getCategory({ state }, payload) {
+    console.log('사용여부 페이로드 : ',payload)
+    axios
+      .post(`${config.localUrl}/category/list`, {
+        complete_yn : payload
+      })
+      .then((res) => {
+        console.log("응답값 : ", res);
+        mutations.SET_CATEGORY(state, res);
+        mutations.SET_WORD_CLOUD(state, res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
 };
