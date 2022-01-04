@@ -45,7 +45,7 @@ export default {
                 return
             }
             console.log('카테고리명 : ',this.name)
-            axios.post(`${config.localUrl}/category/add`,{
+            axios.post(`${process.env.VUE_APP_API}/category/add`,{
                 name: this.name
             }).then((res)=> {
                 this.$store.commit('ADD_CATEGORY', res);

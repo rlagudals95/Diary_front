@@ -111,7 +111,7 @@ export default {
         Object.values(this.upload_img).forEach((file) => formData.append("file", file));
 
   
-        axios.post(`${config.localUrl}/diary/post`, formData, {
+        axios.post(`${process.env.VUE_APP_API}/diary/post`, formData, {
           headers: { 
             'Content-Type': 'multipart/form-data' 
           }

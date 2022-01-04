@@ -8,7 +8,7 @@ export const actions = {
   getDetail({state}, payload) {
     console.log("diary_no : ",payload );
     axios
-      .post(`${config.localUrl}/diary/detail/${payload}`)
+      .post(`${process.env.VUE_APP_API}/diary/detail/${payload}`)
       .then((res) => {
         console.log("응답값 : ", res);
         mutations.SET_DIARY_DETAIL(state, res)

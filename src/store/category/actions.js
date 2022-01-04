@@ -7,7 +7,7 @@ export const actions = {
   getCategoryDetail({ state }, payload) {
     console.log("카테고리_no : ", payload);
     axios
-      .post(`${config.localUrl}/category/view/${payload}`)
+      .post(`${process.env.VUE_APP_API}/category/view/${payload}`)
       .then((res) => {
         console.log("카테고리 상세 응답값 : ", res);
         mutations.SET_CATEGORY_DETAIL(state, res);
@@ -19,7 +19,7 @@ export const actions = {
   getCategory({ state }, payload) {
     console.log('사용여부 페이로드 : ',payload)
     axios
-      .post(`${config.localUrl}/category/list`, {
+      .post(`${process.env.VUE_APP_API}/category/list`, {
         complete_yn : payload
       })
       .then((res) => {
@@ -32,7 +32,7 @@ export const actions = {
       });
   },
   completeCategory({state}, payload) {
-    axios.post(`${config.localUrl}/category/complete/${payload}`, {   
+    axios.post(`${process.env.VUE_APP_API}/category/complete/${payload}`, {   
     }).then((res) => {
       console.log(res)
       mutations.COMPLETE_CATEGORY(state, payload)
