@@ -70,7 +70,6 @@
 
 <script>
 import axios from 'axios';
-import {config} from '../config';
 import {mapState} from 'vuex'
 import FileUpload from '../components/FileUpload.vue'
 //import Grammar from '../components/Grammar.vue'

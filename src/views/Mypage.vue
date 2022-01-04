@@ -17,17 +17,19 @@
         <b-button @click="getCategory('N')" variant="light">진행중인 목표</b-button>
         <b-button @click="getCategory('Y')" variant="dark">완료된 목표</b-button>
         <div class="category-container mt-3" v-for="category in category_list" :key="category.category_no" >
-             <hr/>
-             {{category.name}} / 진행률 : {{category.progress}} / 목표설정일시 : {{category.create_date}}
-             <b-progress class="mt-3" height="7px" :value="category.progress"></b-progress>
-             <b-button v-show =" category.complete_yn == 'N' " class="mt-3 complete_btn" @click="completeCategory(category.category_no)" variant="light">완료처리하기</b-button>
+            <hr/>
+            <div class="category_wrap" v-show="category.use_yn == 'Y' ">
+              {{category.name}} / 진행률 : {{category.progress}} / 목표설정일시 : {{category.create_date}}
+              <b-progress class="mt-3" height="7px" :value="category.progress"></b-progress>
+              <b-button v-show =" category.complete_yn == 'N' " class="mt-3 complete_btn" @click="completeCategory(category.category_no)" variant="light">완료처리</b-button>
+              <b-button v-show =" category.use_yn == 'Y' " class="mt-3 complete_btn" @click="completeCategory(category.category_no)" variant="dark">삭제</b-button>
+            </div>
         </div>
       </div>
   </div>
 </template>
 <script>
 import axios from 'axios'
-import {config} from '../config'
 import {mapState} from 'vuex'
 import WordCloud from '../components/WordCloud.vue'
 
@@ -59,6 +61,9 @@ export default {
         },
         completeCategory (category_no) {
           this.$store.dispatch('completeCategory', category_no)
+        },
+        useCategory (category_no) {
+          this.$store.dispatch('useCategory', category_no)
         }
     },
     created (){

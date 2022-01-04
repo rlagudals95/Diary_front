@@ -1,6 +1,5 @@
 import axios from "axios";
 //import { mutations } from "./mutations";
-import { config } from "../../config";
 import { mutations } from './mutations'
 
 export const actions = {
@@ -36,6 +35,16 @@ export const actions = {
     }).then((res) => {
       console.log(res)
       mutations.COMPLETE_CATEGORY(state, payload)
+    }).catch((err)=> {
+      alert('카테고리 삭제에러')
+      console.log(err)
+    })
+  },
+  useCategory({state}, payload) {
+    axios.post(`${process.env.VUE_APP_API}/category/use/${payload}`, {   
+    }).then((res) => {
+      console.log(res)
+      mutations.DELETE_CATEGORY(state, payload)
     }).catch((err)=> {
       alert('카테고리 삭제에러')
       console.log(err)

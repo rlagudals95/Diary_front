@@ -1,6 +1,5 @@
 import axios from "axios";
 //import { mutations } from "./mutations";
-import { config } from "../../config";
 import { mutations } from "../diary/mutations";
 
 
@@ -12,7 +11,6 @@ export const actions = {
       .then((res) => {
         console.log("응답값 : ", res);
         mutations.SET_DIARY_DETAIL(state, res)
-        
       })
       .catch((err) => {
         console.log(err);
