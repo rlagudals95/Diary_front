@@ -52,11 +52,12 @@ export const mutations = {
     console.log("카테고리 더하기", payload);
     let data = payload.data;
     state.category_list.unshift(data);
-    state.word_cloud_list.unshift({
-      name: data.name,
-      value: data.progress,
-      category_no: data.category_no,
-    });
+   //state.word_cloud_list.unshift({
+   //  name: data.name,
+   //  value: data.progress,
+   //  category_no: data.category_no,
+   //});
+    
   },
   [COMPLETE_CATEGORY](state, payload) {
     console.log("카테고리 더하기", payload);

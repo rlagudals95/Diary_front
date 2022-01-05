@@ -4,12 +4,21 @@
         <div class="mypage-title">MY KEYWORD</div>
         <br>
         <div class="meta-desc">
-         자신이 이루고자 하는 목표나 배우고 싶은 것을 카테고리로 설정해 보세요 :)<br>
-         모르는 것도 괜찮고 기억하고 싶은 것도 다 좋아요<br>
-         진행률이 100 이상이 되면 완료됩니다.
-      </div>
+          자신이 이루고자 하는 목표나 배우고 싶은 것을 카테고리로 설정해 보세요 :)<br>
+          모르는 것도 괜찮고 기억하고 싶은 것도 다 좋아요<br>
+          진행률이 100 이상이 되면 완료됩니다.
+        </div>
+        <br>
+        <hr/>
       <br>
-      <b-form-input v-model="name" placeholder="Enter your keyword"></b-form-input>
+      <div class="mt-3 mb-3">
+        <label class="mb-3 category-img-container"><strong>Category Image</strong>
+        <br/>(카테고리 별로 이미지를 등록할 수도 있어요!)</label>
+        <FileUpload is_preview=""/>
+        <!-- {{upload_img}}  -->
+      </div>
+
+      <b-form-input class="mt-3" v-model="name" placeholder="Enter your keyword"></b-form-input>
       <b-button @keyup.enter="addCate"  @click="addCate" class="mt-3" variant="dark">add keyword</b-button>
       <br />
       <div class="mt-2">   
@@ -32,9 +41,10 @@
 import axios from 'axios'
 import {mapState} from 'vuex'
 import WordCloud from '../components/WordCloud.vue'
+import FileUpload from '../components/FileUpload.vue'
 
 export default {
-    components: {WordCloud},
+    components: {WordCloud, FileUpload },
     data () {
         return {
             name: "",
@@ -46,13 +56,28 @@ export default {
                 alert('카테고리 명을 정확히 입력해주세요')
                 return
             }
+            let data = {
+              name : this.name
+            }
+
+            let formData = new FormData();
+            formData.append('key', new Blob([JSON.stringify(data)] , {type: "application/json"}));
+            Object.values(this.upload_img).forEach((file) => formData.append("file", file));
+
             console.log('카테고리명 : ',this.name)
-            axios.post(`${process.env.VUE_APP_API}/category/add`,{
-                name: this.name
+            axios.post(`${process.env.VUE_APP_API}/category/add`, formData ,{
+                headers: { 
+                  'Content-Type': 'multipart/form-data' 
+                }
+                //name: this.name
             }).then((res)=> {
+                console.log('카테고리 추가 111 : ', res)
                 this.$store.commit('ADD_CATEGORY', res);
+                this.name = '';
+                this.$store.commit('RESET_UPLOAD')
+                
                 console.log('카테고리 추가 res : ', res)
-                this.name = "";
+               
             })
         },
         getCategory (yn){
@@ -73,6 +98,7 @@ export default {
       ...mapState({
          category_list : state => state.category.category_list,
          category_detail : state => state.category.category_detail,
+         upload_img: state => state.diary.upload_img
       })     
     },
 
@@ -104,6 +130,9 @@ export default {
 
   }
 
+  .category-img-container {
+   
+  }
   /* .timer-container {
     font-size: 5rem;
     margin-bottom: 3rem;
