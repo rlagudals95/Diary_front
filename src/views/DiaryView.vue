@@ -14,7 +14,6 @@
 
 <script>
 import axios from 'axios'
-import { config } from '../config'
 import DiaryCard from '../components/DiaryCard.vue'
 //import InfiniteLoading from "vue-infinite-loading";
 import ScrollTop from '../components/ScrollTop.vue'
@@ -34,7 +33,7 @@ export default {
     },
     methods : {
         infiniteHandler ($state){
-           axios.post(`${config.localUrl}/diary/list`,  {
+           axios.post(`${process.env.VUE_APP_API}/diary/list`,  {
                   page: this.page,
                   size: this.size
            }).then(res => {

@@ -18,10 +18,13 @@ export default {
         }
     },
     computed : {
-    ...mapState({
-        diary_detail : state => state.diary.diary_detail
-    })     
-  },
+        ...mapState({
+            diary_detail : state => state.diary.diary_detail
+        }),    
+    },
+    beforeDestroy () {
+        this.$store.commit("RESET_DIARY_DETAIL");
+    } 
 }
 </script>
 <style lang='scss' scoped>

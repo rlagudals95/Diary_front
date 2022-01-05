@@ -27,7 +27,7 @@
 import axios from "axios";
 import {mapState} from 'vuex'
 import ScrollTop from '../components/ScrollTop.vue'
-import { config } from '../config'
+
 //import WordCloud from '../components/WordCloud.vue'
 
 export default {
@@ -47,7 +47,7 @@ export default {
   },
   methods: {
     getContent (){
-      axios.post(`${config.localUrl}/diary/main`,).then((res)=> {
+      axios.post(`${process.env.VUE_APP_API}/diary/main`,).then((res)=> {
         console.log("메인 데이터 : ",res.data)
         this.$store.commit('SET_KEYWORD', res);
       }).catch((err)=> {
@@ -116,7 +116,7 @@ export default {
     z-index: 49;
     //transform: translate(-50%, -50%);
     margin-top: 70px;
-    opacity: 0.3;
+    opacity: 0.7;
     height: 50%;
     font-size: 0.8rem;
     writing-mode:tb-rl;

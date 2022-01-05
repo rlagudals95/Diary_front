@@ -21,6 +21,10 @@ export default {
     components: { Navigation },
     methods :{
       
+    },
+    created (){
+      console.log('환경변수확인 : ',process.env)
+      console.log('환경변수확인 : ',process.env.VUE_APP_API)
     }
 }
 </script>

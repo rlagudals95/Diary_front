@@ -3,17 +3,18 @@ import { config } from "../../config";
 const SET_SPOTS = "SET_SPOTS";
 const SET_LOGIN = "SET_LOGIN";
 const SET_CATEGORY = "SER_CATEGORY";
+const ADD_CATEGORY = "ADD_CATEGORY";
 const SET_WORD_CLOUD = "SET_WORD_CLOUD";
 const LOGIN_CHK = "LOGIN_CHK";
 
 export const mutations = {
   [SET_LOGIN](state, payload) {
-    console.log("접속유저정보:", payload);
+    console.log('접속유저정보:',payload)
     state.isLogin = true;
     state.username = payload;
   },
   [LOGIN_CHK](state, payload) {
-    if (localStorage.getItem("Authorization")) {
+    if (localStorage.getItem('Authorization')){
       state.isLogin = true;
       state.username = payload;
     }
@@ -66,6 +67,17 @@ export const mutations = {
         return acc; // 그 게시물은 새로 받은 게시물 => 그러므로 cur은 return 안해준다
       }
     }, []);
+  },
+  
+  [ADD_CATEGORY](state, payload) {
+    console.log("카테고리 더하기", payload);
+    let data = payload.data;
+    state.category_list.unshift(data);
+    state.word_cloud_list.unshift({
+      name: data.name,
+      value: data.progress,
+      category_no: data.category_no,
+    });
   },
   [SET_WORD_CLOUD](state, payload) {
     let data = payload.data;

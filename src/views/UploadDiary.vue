@@ -70,7 +70,6 @@
 
 <script>
 import axios from 'axios';
-import {config} from '../config';
 import {mapState} from 'vuex'
 import FileUpload from '../components/FileUpload.vue'
 //import Grammar from '../components/Grammar.vue'
@@ -111,7 +110,7 @@ export default {
         Object.values(this.upload_img).forEach((file) => formData.append("file", file));
 
   
-        axios.post(`${config.localUrl}/diary/post`, formData, {
+        axios.post(`${process.env.VUE_APP_API}/diary/post`, formData, {
           headers: { 
             'Content-Type': 'multipart/form-data' 
           }

@@ -1,7 +1,7 @@
 <template>
 <div class="nav-wrap" :class="{'nav-wrap-down' : navDown}" >
     <b-nav class="nav-up"  >
-        <router-link to="/"><b-nav-text class="logo" :class="{'nav-down' : navDown}">META BOOK&nbsp;&nbsp;</b-nav-text></router-link>
+        <router-link to="/"><b-nav-text class="logo" >META BOOK&nbsp;&nbsp;</b-nav-text></router-link>
         <!-- <b-nav-item @click="goUpload()" :class="{'nav-down' : navDown}">Post</b-nav-item> -->
         <b-nav-item @click="goDiary()" :class="{'nav-down' : navDown}">Diary</b-nav-item>
         <b-nav-item v-if="isLogin" @click="goMypage()" :class="{'nav-down' : navDown}">MyPage</b-nav-item>
