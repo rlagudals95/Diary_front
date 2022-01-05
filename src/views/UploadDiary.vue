@@ -33,7 +33,7 @@
 
     <div class="mt-3">
       <label>Image</label>
-      <FileUpload/>
+      <FileUpload is_preview="true"/>
       <!-- {{upload_img}}  -->
     </div>
 

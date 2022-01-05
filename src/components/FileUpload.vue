@@ -1,11 +1,12 @@
 <template>
   <div>
     <div
-      class="imagePreviewWrapper"
+      v-bind:class="[this.upload_img? 'imagePreviewWrapper' :' _imagePreviewWrapper'] "
       :style="{ 'background-image': `url(${previewImage})` }"
       @click="selectImage">
     </div>
     <!-- {{this.uploadFile}} -->
+    <!-- {{this.is_preview}} -->
     <input
       ref="fileInput"
       type="file"
@@ -14,7 +15,10 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
+  props: ['is_preview'],
   data() {
       return {
         previewImage: 'https://lh3.googleusercontent.com/proxy/82wwiIXbVXHzBVE_Cvkt1rU25sOZvnFikxXeJ6PkD5MwKitJ2a1m2n3LllDw_L2GNoz7qeOdVNZazwDn528MEPXTo3Ll6rv0JfpYFtuX0H3AmvDqWdAblpADjRzNtOM',
@@ -39,7 +43,12 @@ export default {
           this.$emit('input', file[0])
         }
       }
-  }
+  },
+  computed : {
+    ...mapState({
+        upload_img: state => state.diary.upload_img
+    })     
+  },
 }
 </script>
 
@@ -52,5 +61,9 @@ export default {
     margin: 0 auto 30px;
     background-size: cover;
     background-position: center center;
+}
+._imagePreviewWrapper {
+    width: 0px;
+    height: 0px;
 }
 </style>
