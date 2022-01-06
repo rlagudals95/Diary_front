@@ -5,7 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve --mode development",
     "dev": "vue-cli-service dev",
-    "prod" : "vue-cli-service serve --mode production",
+    "prod": "vue-cli-service serve --mode production",
     "build": "vue-cli-service serve",
     "lint": "vue-cli-service lint"
   },
@@ -25,6 +25,7 @@
     "open-graph-scraper": "^4.11.0",
     "video-thumbnail-url": "^1.0.1",
     "vue": "^2.6.11",
+    "vue-awesome": "^4.5.0",
     "vue-infinite-loading": "^2.4.5",
     "vue-router": "^3.2.0",
     "vue-wordcloud": "^1.1.1",

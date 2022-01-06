@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      v-bind:class="[this.upload_img? 'imagePreviewWrapper' :' _imagePreviewWrapper'] "
+      v-bind:class="[upload_img? 'imagePreviewWrapper' :' _imagePreviewWrapper'] "
       :style="{ 'background-image': `url(${previewImage})` }"
       @click="selectImage">
     </div>
