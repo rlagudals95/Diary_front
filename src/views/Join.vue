@@ -90,7 +90,7 @@ import axios from "axios";
         }
 
         console.log(this.form.email, this.form.password)
-        axios.post('http://localhost:8000/join',  
+        axios.post(`${process.env.VUE_APP_API}/join`,  
             {
                username : _form.username,
                password : _form.password,
