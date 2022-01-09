@@ -167,6 +167,7 @@ export default {
     align-items: center;
     text-align: center;
     position: relative;
+    padding-bottom: 30px;
   }
 
   .keyword-back {
@@ -176,10 +177,10 @@ export default {
     margin: 50px auto 0px auto; 
     opacity: 0.6;
     height: 50%;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     writing-mode:tb-rl;
-    line-height: 2rem;
-    letter-spacing: 0.5rem;
+    line-height: 1.5rem;
+    letter-spacing: 0.3rem;
   }
 
 </style>
