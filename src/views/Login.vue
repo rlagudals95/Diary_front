@@ -55,7 +55,7 @@ export default {
       event.preventDefault();
       console.log(this.form.email, this.form.password);
       axios
-        .post("http://localhost:8000/login", {
+        .post(`${process.env.VUE_APP_API}/login`, {
           username: this.form.username,
           password: this.form.password,
         })
