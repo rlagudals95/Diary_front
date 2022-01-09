@@ -3,8 +3,13 @@
       <ScrollTop /> 
         <!-- <WordCloud/> -->
         <div class="meta-catainer">
-          <div class="meta-title mb-3" @click="openMetaInfo">메타인지란?</div>
-          <!-- <div class="meta-toggle"> <BIconArrowDown/></div> -->
+          <div class="meta-title mb-3" @click="openMetaInfo">
+            메타인지란?
+            <div class="arrow-down"><BIconChevronDown/></div>
+            
+          </div>
+          <!-- <div class="meta-toggle"> </div> -->
+          <hr/>
           <div v-bind:class="[ is_open_meta? 'meta-info-open ' :' meta-info'] ">
             <div class="meta-eng">meta-cognition , Self reflection</div>
             <div class="meta-desc ">
@@ -78,11 +83,17 @@ export default {
 </script>
 
 <style lang='scss' scoped >
+  @keyframes blink {
+    0% {opacity: 0.3;}
+    50% {opacity: 0.7;}
+    100% {opacity: 1;}
+  }
+
   .main-container {
     //background-color: red;
     width: 80%;
     height: 100%;
-    margin: 5rem auto 0px auto;
+    margin: 6rem auto 0px auto;
     align-items: center;
     z-index: 1;
   }
@@ -107,6 +118,13 @@ export default {
     font-weight: bolder;
     cursor: pointer;
     text-shadow:  0 0 1em rgba(0,0,0,0.1);
+  }
+
+  .arrow-down {
+    font-size: 25px;
+    font-weight: bolder;
+    animation: blink 1s infinite;
+    /* animation-direction: alternate; */
   }
 
   .meta-title:hover {

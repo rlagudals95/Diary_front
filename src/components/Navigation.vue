@@ -1,12 +1,16 @@
 <template>
-<div class="nav-wrap" :class="{'nav-wrap-down' : navDown}" >
-    <b-nav class="nav-up"  >
-        <router-link to="/"><b-nav-text class="logo" >META BOOK&nbsp;&nbsp;</b-nav-text></router-link>
-        <!-- <b-nav-item @click="goUpload()" :class="{'nav-down' : navDown}">Post</b-nav-item> -->
-        <b-nav-item @click="goDiary()" :class="{'nav-down' : navDown}">Diary</b-nav-item>
-        <b-nav-item v-if="isLogin" @click="goMypage()" :class="{'nav-down' : navDown}">MyPage</b-nav-item>
-        <b-nav-item v-else @click="goLogin()" :class="{'nav-down' : navDown}">Login</b-nav-item>
-        <b-nav-item v-show="isLogin" @click="goLogOut()" :class="{'nav-down' : navDown}">Logout</b-nav-item>
+<div class="nav-wrap" :class="{'nav-down' : navDown}" >
+    <b-nav class="nav-up nav-container" >
+        <span class="nav-left">
+            <router-link to="/"><b-nav-text class="logo" >META &nbsp;&nbsp;</b-nav-text></router-link>
+        <!-- <b-nav-item @click="goUpload()" :class="{'nav-down' : navDown}">Post</b-nav-item> -->     
+            <b-nav-item @click="goDiary()">Diary</b-nav-item>
+            <b-nav-item v-if="isLogin" @click="goMypage()">MyPage</b-nav-item>
+            <b-nav-item v-else @click="goLogin()">Login</b-nav-item>
+        </span>
+        <span class="nav-right">
+            <b-nav-item v-show="isLogin" @click="goLogOut()">Logout</b-nav-item>
+        </span>
     </b-nav>
 </div>
 </template>
@@ -76,12 +80,33 @@ export default {
     left: 0;
     right: 0;
     margin: 0px auto;
-    padding: 20px;
+    padding: 8px 20px;
     width: 100%;
     z-index: 50;
     font-weight: bold;
     transform: translate3d(0, 0, 0);
     transition: 0.1s all ease-out;
+    background-color: white;
+    width: 100%;
+    opacity: 0.85;
+  
+}
+.nav-container {
+    justify-content: space-between;
+    opacity: 1 !important;
+}
+.logo {
+    font-weight: bolder;
+}
+
+.nav-left {
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-right {
+    display: flex;
+    color: black;
 }
 /* .nav-wrap-down{
     position: fixed;
@@ -96,6 +121,7 @@ export default {
 }
 .nav-down {
     color: black !important;
+    display: none;
 }
 
 </style>

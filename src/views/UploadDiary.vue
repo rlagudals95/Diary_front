@@ -62,8 +62,10 @@
         required
       ></b-form-textarea>
     </div>
-    <b-button type="" @click="goGrammar()" class="mt-3" variant="blue">맞춤법 검사하기</b-button>
-    <b-button type="" @click="submitDiary()" class="mt-3" variant="dark">POST</b-button>
+    <div class="btn-wrap">
+      <b-button type="" @click="goGrammar()" class="mt-3" variant="blue">맞춤법 검사하기</b-button>
+      <b-button type="" @click="submitDiary()" class="mt-3" variant="dark">POST</b-button>
+    </div>
   </div>
   
 </template>
@@ -98,17 +100,21 @@ export default {
           alert('내용을 모두 채워넣어 주세요!')
           return
         }
+        if (this.score <= 0 || this.score > 100){
+          alert('점수는 1점 이상으로 입력해 주세요!');
+          return
+        }
 
         console.log('param : ',this.title, this.content, '/', this.category_no)
-        const formData = new FormData();
+        let formData = new FormData();
         formData.append('title', this.title);
         formData.append('content', this.content);
         formData.append('category_no', this.category_no);
         formData.append('score', this.score);
         formData.append('keyword', this.keyword);
-        formData.append('complete_yn', this.complete_yn);
-        Object.values(this.upload_img).forEach((file) => formData.append("file", file));
-
+        if (this.upload_img){
+          Object.values(this.upload_img).forEach((file) => formData.append("file", file));
+        }
   
         axios.post(`${process.env.VUE_APP_API}/diary/post`, formData, {
           headers: { 
@@ -116,6 +122,7 @@ export default {
           }
         }).then((res)=> {
           console.log('게시물 작성 반응값 : ', res)
+          this.$store.commit('ADD_DIARY', res);
           this.$router.push('diaryView')
         })
       },
@@ -173,5 +180,11 @@ export default {
   .time-info {
     font-size: 2.5vw;
     opacity: 0.8;
+  }
+
+  .btn-wrap {
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
   }
 </style>

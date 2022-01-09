@@ -52,28 +52,31 @@ export const mutations = {
     console.log("카테고리 더하기", payload);
     let data = payload.data;
     state.category_list.unshift(data);
-   //state.word_cloud_list.unshift({
-   //  name: data.name,
-   //  value: data.progress,
-   //  category_no: data.category_no,
-   //});
-    
+    //state.word_cloud_list.unshift({
+    //  name: data.name,
+    //  value: data.progress,
+    //  category_no: data.category_no,
+    //});
   },
   [COMPLETE_CATEGORY](state, payload) {
     console.log("카테고리 더하기", payload);
     let category_list = state.category_list;
 
-    for (let i = 0; i < category_list.length; i++){
-      if(category_list[i].category_no == payload) category_list[i].complete_yn = 'Y'
+    for (let i = 0; i < category_list.length; i++) {
+      if (category_list[i].category_no == payload)
+        category_list[i].complete_yn = "Y";
+      category_list.splice(i, 1);
     }
   },
   [DELETE_CATEGORY](state, payload) {
     console.log("카테고리 빼기", payload);
     let category_list = state.category_list;
 
-    for (let i = 0; i < category_list.length; i++){
-      if(category_list[i].category_no == payload) category_list[i].use_yn = 'N'
+    for (let i = 0; i < category_list.length; i++) {
+      if (category_list[i].category_no == payload) {
+        category_list[i].use_yn = "N";
+        category_list.splice(i, 1);
+      }
     }
   },
-  
 };

@@ -121,7 +121,7 @@ export default {
     }
     .hover-content {
       font-size: 0.7rem;
-
+      opacity: 0.7;
     }
 
 

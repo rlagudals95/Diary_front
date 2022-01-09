@@ -10,13 +10,13 @@ import {
   NavPlugin,
   BIcon,
   BIconArrowUp,
-  BIconArrowDown
+  BIconArrowDown,
+  BIconChevronDown,
 } from "bootstrap-vue";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import "mdb-vue-ui-kit/css/mdb.min.css";
-import 'vue-awesome/icons/flag'
-
+import "vue-awesome/icons/flag";
 
 Vue.config.productionTip = false;
 Vue.use(BootstrapVue);
@@ -25,7 +25,7 @@ Vue.use(NavPlugin);
 Vue.use(InfiniteLoading);
 Vue.use(global);
 Vue.component("BIcon", BIcon);
-Vue.component("BIconArrowUp", BIconArrowUp, BIconArrowDown);
+Vue.component("BIconArrowUp", BIconArrowUp, BIconArrowDown, BIconChevronDown);
 
 new Vue({
   router,

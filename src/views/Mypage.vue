@@ -1,6 +1,6 @@
 <template>
   <div class="mypage-container">
-        <WordCloud/>
+        <!-- <WordCloud/> -->
         <div class="mypage-title">MY KEYWORD</div>
         <br>
         <div class="meta-desc">
@@ -31,7 +31,7 @@
               {{category.name}} / 진행률 : {{category.progress}} / 목표설정일시 : {{category.create_date}}
               <b-progress class="mt-3" height="7px" :value="category.progress"></b-progress>
               <b-button v-show =" category.complete_yn == 'N' " class="mt-3 complete_btn" @click="completeCategory(category.category_no)" variant="light">완료처리</b-button>
-              <b-button v-show =" category.use_yn == 'Y' " class="mt-3 complete_btn" @click="completeCategory(category.category_no)" variant="dark">삭제</b-button>
+              <b-button v-show =" category.use_yn == 'Y' " class="mt-3 complete_btn" @click="useCategory(category.category_no)" variant="dark">삭제</b-button>
             </div>
         </div>
       </div>
@@ -40,11 +40,11 @@
 <script>
 import axios from 'axios'
 import {mapState} from 'vuex'
-import WordCloud from '../components/WordCloud.vue'
+//import WordCloud from '../components/WordCloud.vue'
 import FileUpload from '../components/FileUpload.vue'
 
 export default {
-    components: {WordCloud, FileUpload },
+    components: {FileUpload },
     data () {
         return {
             name: "",
@@ -61,9 +61,12 @@ export default {
             }
 
             let formData = new FormData();
+           
             formData.append('key', new Blob([JSON.stringify(data)] , {type: "application/json"}));
-            Object.values(this.upload_img).forEach((file) => formData.append("file", file));
-
+            if(this.upload_img) {
+               Object.values(this.upload_img).forEach((file) => formData.append("file", file));
+            }
+           
             console.log('카테고리명 : ',this.name)
             axios.post(`${process.env.VUE_APP_API}/category/add`, formData ,{
                 headers: { 

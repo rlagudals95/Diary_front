@@ -4,6 +4,7 @@ const SET_DIARY_DETAIL = "SET_DIARY_DETAIL";
 const SET_UPLOAD_IMG = "SET_UPLOAD_IMG";
 const RESET_DIARY_DETAIL = "RESET_DIARY_DETAIL";
 const RESET_UPLOAD = "RESET_UPLOAD";
+const ADD_DIARY = "ADD_DIARY";
 
 export const mutations = {
   [SET_DIARY_LIST](state, payload) {
@@ -29,6 +30,11 @@ export const mutations = {
       }
     }, []);
   },
+  [ADD_DIARY](state, payload) {
+    console.log("게시물추가 res : ", payload);
+    state.diary_list.unshift(payload);
+  },
+
   [SET_KEYWORD](state, payload) {
     state.keyword = payload.data;
   },
@@ -44,6 +50,6 @@ export const mutations = {
   },
   [RESET_UPLOAD](state) {
     state.upload_img = null;
-    console.log("upload_img : ",state.upload_img)
+    console.log("upload_img : ", state.upload_img);
   },
 };
