@@ -5,6 +5,7 @@ const SET_UPLOAD_IMG = "SET_UPLOAD_IMG";
 const RESET_DIARY_DETAIL = "RESET_DIARY_DETAIL";
 const RESET_UPLOAD = "RESET_UPLOAD";
 const ADD_DIARY = "ADD_DIARY";
+const EDIT_DIARY = "EDIT_DIARY";
 
 export const mutations = {
   [SET_DIARY_LIST](state, payload) {
@@ -52,4 +53,14 @@ export const mutations = {
     state.upload_img = null;
     console.log("upload_img : ", state.upload_img);
   },
+  [EDIT_DIARY](state, payload) {
+    console.log("수정된 데이터 ",state,payload)
+    let diary_list =  state.diary_list;
+    // 이분탐색 알고리즘으로 추후 변경예정
+    for (let i = 0; i < diary_list.length; i++){
+      if(diary_list[i].diary_no == payload.diary_no){
+        diary_list[i] = payload;
+      }
+    }
+  }
 };
