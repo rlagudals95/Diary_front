@@ -7,8 +7,8 @@
         <img class="mt-3 detail-image" :src="diary_detail.image_url" />
       </div>
       <div class="detail-btn-container">
-        <b-button variant="light">수정</b-button>
-        <b-button variant="dark">삭제</b-button>
+        <!-- <b-button @click="editDiary(diary_detail)" variant="light">수정</b-button> -->
+        <b-button @click="deleteDiary(diary_detail)" variant="dark">삭제</b-button>
       </div>
   </div>
 </template>
@@ -27,6 +27,16 @@ export default {
         ...mapState({
             diary_detail : state => state.diary.diary_detail
         }),    
+    },
+    methods :{
+        editDiary (diary_no){
+            console.log("수정 다이어리", diary_no)
+        },
+        deleteDiary (diary_detail){  
+            console.log("삭제 다이어리", diary_detail)
+            this.$store.dispatch("deleteDiary", diary_detail);
+            this.$router.push("/diaryView");
+        }
     },
     beforeDestroy () {
         this.$store.commit("RESET_DIARY_DETAIL");

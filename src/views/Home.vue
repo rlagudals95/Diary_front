@@ -54,7 +54,8 @@ export default {
       isLoading: true,
       is_open_meta: false,
       pageNo: 1,
-      Posts : []
+      Posts : [],
+      isLogin: localStorage.getItem('Authorization')
     }
   },
   methods: {
@@ -68,6 +69,11 @@ export default {
     },
     openMetaInfo (){
       this.is_open_meta = !this.is_open_meta;
+    },
+    goLogin (){
+      if(!this.isLogin){
+        this.$router.push("/login");
+      }
     }
   },
   computed : {
@@ -76,9 +82,12 @@ export default {
         keyword : state => state.diary.keyword
     })     
   },
-  mounted() {
+  mounted() { 
     this.getContent();
   },
+  created (){
+    this.goLogin ()
+  }
 };
 </script>
 

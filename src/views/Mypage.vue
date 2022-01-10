@@ -44,7 +44,7 @@ import {mapState} from 'vuex'
 import FileUpload from '../components/FileUpload.vue'
 
 export default {
-    components: {FileUpload },
+    components: { FileUpload },
     data () {
         return {
             name: "",
@@ -67,7 +67,6 @@ export default {
                Object.values(this.upload_img).forEach((file) => formData.append("file", file));
             }
            
-            console.log('카테고리명 : ',this.name)
             axios.post(`${process.env.VUE_APP_API}/category/add`, formData ,{
                 headers: { 
                   'Content-Type': 'multipart/form-data' 
@@ -77,10 +76,7 @@ export default {
                 console.log('카테고리 추가 111 : ', res)
                 this.$store.commit('ADD_CATEGORY', res);
                 this.name = '';
-                this.$store.commit('RESET_UPLOAD')
-                
-                console.log('카테고리 추가 res : ', res)
-               
+                this.$store.commit('RESET_UPLOAD')            
             })
         },
         getCategory (yn){
