@@ -46,8 +46,9 @@ export default {
         },
         onScroll (){
             const currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop   
-            // Because of momentum scrolling on mobiles, we shouldn't continue if it is less than zero
-            if (this.lastScrollPosition < currentScrollPosition){
+
+            // 모바일에선 네비게이션 사라짐 x
+            if (screen.width > 700 && this.lastScrollPosition < currentScrollPosition){
                 this.navDown = true;
             } else {
                 this.navDown = false;
@@ -67,7 +68,7 @@ export default {
     computed : {
         ...mapState({
         isLogin : state => state.user.isLogin,
-    })     
+    })    
   },
   
 }

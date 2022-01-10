@@ -2,12 +2,15 @@
     <div class="main-container">
       <ScrollTop /> 
         <!-- <WordCloud/> -->
+        <div class="chart-container mb-5">
+          <RadarChart :data="radarChart.data" :options="radarChart.options" class="height-sm" />
+          {{category_list}}
+        </div>
         <div class="meta-catainer">
           <div class="meta-title mb-3" @click="openMetaInfo">
             메타인지란?
-            <div class="arrow-down"><BIconChevronDown/></div>
-            
-          </div>
+          <div class="arrow-down"><BIconChevronDown/></div>
+        </div>
           <!-- <div class="meta-toggle"> </div> -->
           <hr/>
           <div v-bind:class="[ is_open_meta? 'meta-info-open ' :' meta-info'] ">
@@ -38,7 +41,8 @@
 import axios from "axios";
 import {mapState} from 'vuex'
 import ScrollTop from '../components/ScrollTop.vue'
-//import {BIconArrowDown } from 'bootstrap-vue'
+import RadarChart from '../chart/RadarChart.js';
+//import BarChart from '../chart/BarChart.js'
 //import WordCloud from '../components/WordCloud.vue'
 
 export default {
@@ -46,17 +50,49 @@ export default {
   components: { 
     //Card, InfiniteLoading, 
     ScrollTop, 
+    RadarChart
     //WordCloud
   },
   data () {
+    //  let random = function() { 
+    //   return Math.round(Math.random()*100)
+    // };
     return {
       cards : this.$store.state.spotStore.spots,
       isLoading: true,
       is_open_meta: false,
       pageNo: 1,
       Posts : [],
-      isLogin: localStorage.getItem('Authorization')
-    }
+      isLogin: localStorage.getItem('Authorization'),
+      radarChart: {
+				data: {
+					labels: [],
+					datasets: [{
+						label: 'Dataset 1',
+						borderWidth: 2,
+						borderColor: '#ff5b57',
+						pointBackgroundColor: '#ff5b57',
+						pointRadius: 2,
+						backgroundColor: 'rgba(255, 91, 87, 0.2)',
+						data: []
+					}, 
+          // {
+					// 	label: 'Dataset 2',
+					// 	borderWidth: 2,
+					// 	borderColor: '#2d353c',
+					// 	pointBackgroundColor: '#2d353c',
+					// 	pointRadius: 2,
+					// 	backgroundColor: 'rgba(45, 53, 60, 0.2)',
+					// 	data: [random(),random(),random(),random(),random(),random(),random()]
+					// }
+          ]
+				},
+				options: {
+					responsive: true, 
+					maintainAspectRatio: false
+				}
+			},
+     }
   },
   methods: {
     getContent (){
@@ -74,19 +110,40 @@ export default {
       if(!this.isLogin){
         this.$router.push("/login");
       }
+    },
+    getCategory (yn){
+      if (!yn) yn = 'N';
+      this.$store.dispatch('getCategory', yn).then((res)=> {
+      console.log('덴.....',res)
+      let _chart = this.radarChart.data  
+      for (let i = 0; i < 6; i++){
+        console.log('하나씩', this.category_list[i])
+        console.log('라벨', _chart.labels)
+        console.log('데이터셋', _chart.datasets[0].data)
+        _chart.labels.push(this.category_list[i].name);
+        _chart.datasets[0].data.push(parseInt(this.category_list[i].progress));
+        }
+      })
+    },
+    setChartData (data){
+      console.log('카테고리 데이터 돌려볼까 : ',data)
     }
   },
   computed : {
     ...mapState({
         spots : state => state.spotStore.spots,
-        keyword : state => state.diary.keyword
+        keyword : state => state.diary.keyword,
+        category_list : state => state.category.category_list
     })     
   },
   mounted() { 
     this.getContent();
+    //this.setChartData(this.category_list);
+  
   },
   created (){
-    this.goLogin ()
+    this.goLogin ();
+    this.getCategory();
   }
 };
 </script>
@@ -106,7 +163,9 @@ export default {
     align-items: center;
     z-index: 1;
   }
-
+  .chart-container{
+    
+  }
   .meta-catainer {
     z-index: 50;
   }
