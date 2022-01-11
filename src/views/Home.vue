@@ -2,15 +2,34 @@
     <div class="main-container">
       <ScrollTop /> 
         <!-- <WordCloud/> -->
+        <div class="chart-container mb-5">
+          {{this.$store.state.config.Loading}}
+          레이더
+          <RadarChart :data="this.chartInfo.data" :options="this.chartInfo.options" class="height-sm" />
+          도넛
+          <DoughnutChart :data="this.chartInfo.data" :options="this.chartInfo.options" class="height-sm" />
+          바
+          <BarChart :data="this.chartInfo.data" :options="this.chartInfo.options" class="height-sm" />
+          호리즌
+          <HorizontalBarChart :data="this.chartInfo.data" :options="this.chartInfo.options" class="height-sm" />
+          라인
+          <LineChart :data="this.chartInfo.data" :options="this.chartInfo.options" class="height-sm" />
+          폴라
+          <PolarAreaChart :data="this.chartInfo.data" :options="this.chartInfo.options" class="height-sm" />
+          버블
+          <BubbleChart :data="this.chartInfo.data" :options="this.chartInfo.options" class="height-sm" />
+          스캐터
+          <Scatter :data="this.chartInfo.data" :options="this.chartInfo.options" class="height-sm" />
+        </div>
         <div class="meta-catainer">
-          <div class="meta-title mb-3" @click="openMetaInfo">
+          <!-- <div class="meta-title mb-3" @click="openMetaInfo">
             메타인지란?
-            <div class="arrow-down"><BIconChevronDown/></div>
-            
-          </div>
+            {{test}}
+          <div class="arrow-down"><BIconChevronDown/></div>
+        </div> -->
           <!-- <div class="meta-toggle"> </div> -->
           <hr/>
-          <div v-bind:class="[ is_open_meta? 'meta-info-open ' :' meta-info'] ">
+          <div v-bind:class="[ is_open_meta? 'meta-info-open ' : 'meta-info' ]">
             <div class="meta-eng">meta-cognition , Self reflection</div>
             <div class="meta-desc ">
               메타인지란, '인지과정에 대한 인지 능력'을 가리키는 말이라고 합니다.<br/>
@@ -38,30 +57,41 @@
 import axios from "axios";
 import {mapState} from 'vuex'
 import ScrollTop from '../components/ScrollTop.vue'
-//import {BIconArrowDown } from 'bootstrap-vue'
+import RadarChart from '../chart/RadarChart.js';
+import DoughnutChart from '../chart/DoughnutChart.js'
+import BarChart from '../chart/BarChart.js'
+import HorizontalBarChart from '../chart/HorizontalBarChart.js'
+import LineChart from '../chart/LineChart.js'
+import PolarAreaChart from '../chart/PolarAreaChart.js'
+import BubbleChart from '../chart/BubbleChart.js'
+import Scatter from '../chart/Scatter.js'
 //import WordCloud from '../components/WordCloud.vue'
 
 export default {
   name: "Home",
   components: { 
-    //Card, InfiniteLoading, 
     ScrollTop, 
+    RadarChart,
+    DoughnutChart,
+    BarChart,
+    HorizontalBarChart,
+    LineChart,
+    PolarAreaChart,
+    BubbleChart,
+    Scatter
     //WordCloud
   },
   data () {
     return {
-      cards : this.$store.state.spotStore.spots,
-      isLoading: true,
       is_open_meta: false,
-      pageNo: 1,
-      Posts : [],
-      isLogin: localStorage.getItem('Authorization')
-    }
+      isLogin: localStorage.getItem('Authorization'),
+      chartInfo : null,
+     }
   },
   methods: {
     getContent (){
       axios.post(`${process.env.VUE_APP_API}/diary/main`,).then((res)=> {
-        console.log("메인 데이터 : ",res.data)
+        //console.log("메인 데이터 : ",res.data)
         this.$store.commit('SET_KEYWORD', res);
       }).catch((err)=> {
         console.error(err)
@@ -74,19 +104,57 @@ export default {
       if(!this.isLogin){
         this.$router.push("/login");
       }
-    }
+    },
+    getCategory (yn){
+        if (!yn) yn = 'N';
+        this.$store.dispatch('getCategory', yn).then(()=> {
+          let chartData = {
+            data: {
+              labels: this.chartData.labels,
+              datasets: [{
+                label: 'Progress',
+                font: {
+                  size: 12
+                },
+                borderWidth: 2,
+                borderColor: '#ff5b57',
+                pointBackgroundColor: '#ff5b57',
+                pointRadius: 2,
+                backgroundColor: 'rgba(255, 91, 87, 0.2)',
+                data: this.chartData.progress
+              },]
+            },
+            options: {
+              responsive: true, 
+              maintainAspectRatio: false,
+            }
+          }
+          this.chartInfo = chartData;
+        })     
+    },
   },
   computed : {
     ...mapState({
         spots : state => state.spotStore.spots,
-        keyword : state => state.diary.keyword
+        keyword : state => state.diary.keyword,
+        category_list : state => state.category.category_list,
+        chartData : state => state.category.category_chart,
+        Loading : state => state.config.Loading
     })     
   },
   mounted() { 
     this.getContent();
+    
   },
   created (){
-    this.goLogin ()
+    this.goLogin ();
+    this.getCategory();
+  },
+  watch :{
+    chartInfo: function () {
+      console.log('차트 데이터 변경')
+      this.$forceUpdate();
+    }
   }
 };
 </script>
@@ -106,7 +174,9 @@ export default {
     align-items: center;
     z-index: 1;
   }
-
+  .chart-container{
+    
+  }
   .meta-catainer {
     z-index: 50;
   }

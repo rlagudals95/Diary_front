@@ -32,7 +32,7 @@ export const mutations = {
     }
   },
   [SET_CATEGORY](state, payload) {
-    console.log("카테고리 데이터 들어옴", payload);
+    console.log("셋 카테고리 : ", payload);
     let data = payload.data;
     for (let i = 0; i < data.length; i++) {
       state.category_list.push(data[i]);

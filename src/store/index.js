@@ -4,19 +4,21 @@ import { spotStore } from "@/store/spot";
 import { user } from "@/store/user";
 import { diary } from "@/store/diary"
 import { category } from "./category";
+import { config } from "./config"
 
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
   namespaced: false,
-  state: { test: "test" },
+  state: { },
   mutations: {},
   actions: {},
   modules: {
     spotStore: spotStore,
     user: user,
     diary: diary,
-    category: category
+    category: category,
+    config : config
   },
 });
 

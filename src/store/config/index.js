@@ -3,12 +3,10 @@ import { actions } from "./actions";
 import { mutations } from "./mutations";
 
 const state = {
-  category_detail: null,
-  category_list: [],
-  category_chart : {labels : [], progress: []}
+  Loading: false,
 };
 
-export const category = {
+export const config = {
   state,
   actions,
   mutations,

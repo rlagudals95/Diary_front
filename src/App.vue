@@ -1,11 +1,11 @@
 <template>
   <div id="app">
     <Navigation />
+    <Spinner /> 
     <div class="main-background"></div>
     <div id="nav">
       <!-- <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> -->
-      
     </div>
     <router-view/>
   </div>
@@ -14,11 +14,12 @@
 
 import Navigation from './components/Navigation'
 import axios from 'axios'
+import Spinner from './components/Spinner'
 axios.defaults.headers.common['Authorization'] = localStorage.getItem('Authorization');
 
 export default {
     name: "App",
-    components: { Navigation },
+    components: { Navigation , Spinner},
     methods :{
       
     },

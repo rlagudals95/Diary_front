@@ -4,6 +4,7 @@ const SET_CATEGORY = "SET_CATEGORY";
 const ADD_CATEGORY = "ADD_CATEGORY";
 const COMPLETE_CATEGORY = "COMPLETE_CATEGORY";
 const DELETE_CATEGORY = "DELETE_CATEGORY";
+const SET_CATEGORY_CHART = "SET_CATEGORY_CHART";
 
 export const mutations = {
   [SET_CATEGORY_DETAIL](state, payload) {
@@ -11,11 +12,9 @@ export const mutations = {
     state.category_detail = payload.data;
   },
   [SET_CATEGORY](state, payload) {
-    console.log("카테고리 데이터 들어옴", payload);
+    console.log("셋 카테고리 : ", payload);
+    
     let data = payload.data;
-    // for (let i = 0; i < data.length; i++) {
-    //   state.category_list.push(data[i]);
-    // }
     state.category_list = data;
     state.category_list = state.category_list.reduce((acc, cur) => {
       if (acc.findIndex((a) => a.category_no === cur.category_no) === -1) {
@@ -78,5 +77,20 @@ export const mutations = {
         category_list.splice(i, 1);
       }
     }
+  },
+  [SET_CATEGORY_CHART](state, payload) {
+
+
+    let labels = []
+    let progresses = []
+    console.log("그래프 카테고리 ", state, payload);
+    for (let i = 0; i < payload.data.length; i++){
+      labels.push(payload.data[i].name);
+      progresses.push(payload.data[i].progress);
+    }
+
+    state.category_chart.labels = labels;
+    state.category_chart.progress = progresses;
+    
   },
 };
