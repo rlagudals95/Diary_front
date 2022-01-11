@@ -3,7 +3,23 @@
       <ScrollTop /> 
         <!-- <WordCloud/> -->
         <div class="chart-container mb-5">
+          {{this.$store.state.config.Loading}}
+          레이더
           <RadarChart :data="this.chartInfo.data" :options="this.chartInfo.options" class="height-sm" />
+          도넛
+          <DoughnutChart :data="this.chartInfo.data" :options="this.chartInfo.options" class="height-sm" />
+          바
+          <BarChart :data="this.chartInfo.data" :options="this.chartInfo.options" class="height-sm" />
+          호리즌
+          <HorizontalBarChart :data="this.chartInfo.data" :options="this.chartInfo.options" class="height-sm" />
+          라인
+          <LineChart :data="this.chartInfo.data" :options="this.chartInfo.options" class="height-sm" />
+          폴라
+          <PolarAreaChart :data="this.chartInfo.data" :options="this.chartInfo.options" class="height-sm" />
+          버블
+          <BubbleChart :data="this.chartInfo.data" :options="this.chartInfo.options" class="height-sm" />
+          스캐터
+          <Scatter :data="this.chartInfo.data" :options="this.chartInfo.options" class="height-sm" />
         </div>
         <div class="meta-catainer">
           <!-- <div class="meta-title mb-3" @click="openMetaInfo">
@@ -42,22 +58,32 @@ import axios from "axios";
 import {mapState} from 'vuex'
 import ScrollTop from '../components/ScrollTop.vue'
 import RadarChart from '../chart/RadarChart.js';
-//import BarChart from '../chart/BarChart.js'
+import DoughnutChart from '../chart/DoughnutChart.js'
+import BarChart from '../chart/BarChart.js'
+import HorizontalBarChart from '../chart/HorizontalBarChart.js'
+import LineChart from '../chart/LineChart.js'
+import PolarAreaChart from '../chart/PolarAreaChart.js'
+import BubbleChart from '../chart/BubbleChart.js'
+import Scatter from '../chart/Scatter.js'
 //import WordCloud from '../components/WordCloud.vue'
 
 export default {
   name: "Home",
   components: { 
     ScrollTop, 
-    RadarChart
+    RadarChart,
+    DoughnutChart,
+    BarChart,
+    HorizontalBarChart,
+    LineChart,
+    PolarAreaChart,
+    BubbleChart,
+    Scatter
     //WordCloud
   },
   data () {
     return {
-      isLoading: true,
       is_open_meta: false,
-      pageNo: 1,
-      Posts : [],
       isLogin: localStorage.getItem('Authorization'),
       chartInfo : null,
      }
@@ -82,7 +108,6 @@ export default {
     getCategory (yn){
         if (!yn) yn = 'N';
         this.$store.dispatch('getCategory', yn).then(()=> {
-
           let chartData = {
             data: {
               labels: this.chartData.labels,
@@ -113,20 +138,24 @@ export default {
         spots : state => state.spotStore.spots,
         keyword : state => state.diary.keyword,
         category_list : state => state.category.category_list,
-        chartData : state => state.category.category_chart
+        chartData : state => state.category.category_chart,
+        Loading : state => state.config.Loading
     })     
   },
   mounted() { 
     this.getContent();
     
   },
-  updated (){
-    this.setChartData();
-  },
   created (){
     this.goLogin ();
     this.getCategory();
   },
+  watch :{
+    chartInfo: function () {
+      console.log('차트 데이터 변경')
+      this.$forceUpdate();
+    }
+  }
 };
 </script>
 
