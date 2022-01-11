@@ -32,8 +32,8 @@ export const mutations = {
     }, []);
   },
   [ADD_DIARY](state, payload) {
-    console.log("게시물추가 res : ", payload);
-    state.diary_list.unshift(payload);
+    console.log("게시물추가 res : ", payload.data);
+    state.diary_list.unshift(payload.data);
   },
 
   [SET_KEYWORD](state, payload) {

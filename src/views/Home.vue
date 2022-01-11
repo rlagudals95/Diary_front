@@ -262,7 +262,7 @@ export default {
     //transform: translate(-50%, -50%);
     margin: 50px auto 0px auto; 
     opacity: 0.6;
-    height: 50%;
+    height: 35%;
     font-size: 0.9rem;
     writing-mode:tb-rl;
     line-height: 1.5rem;
