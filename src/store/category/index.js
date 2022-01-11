@@ -5,6 +5,7 @@ import { mutations } from "./mutations";
 const state = {
   category_detail: null,
   category_list: [],
+  category_chart : {labels : [], progress: []}
 };
 
 export const category = {
