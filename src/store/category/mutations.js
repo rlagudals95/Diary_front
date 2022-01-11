@@ -13,7 +13,7 @@ export const mutations = {
   },
   [SET_CATEGORY](state, payload) {
     console.log("셋 카테고리 : ", payload);
-    
+
     let data = payload.data;
     state.category_list = data;
     state.category_list = state.category_list.reduce((acc, cur) => {
@@ -79,18 +79,17 @@ export const mutations = {
     }
   },
   [SET_CATEGORY_CHART](state, payload) {
-
-
-    let labels = []
-    let progresses = []
+    let labels = [];
+    let progresses = [];
     console.log("그래프 카테고리 ", state, payload);
-    for (let i = 0; i < payload.data.length; i++){
+    let loopCnt = payload.data.length;
+    if (payload.data.length >= 10) loopCnt = 10;
+    for (let i = 0; i < loopCnt; i++) {
       labels.push(payload.data[i].name);
       progresses.push(payload.data[i].progress);
     }
 
     state.category_chart.labels = labels;
     state.category_chart.progress = progresses;
-    
   },
 };

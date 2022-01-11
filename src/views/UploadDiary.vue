@@ -99,8 +99,8 @@ export default {
           alert('내용을 모두 채워넣어 주세요!')
           return
         }
-        if (this.score <= 0 || this.score > 100){
-          alert('점수는 1점 이상으로 입력해 주세요!');
+        if (this.score <= 0 || this.score > 100 || this.score == 0){
+          alert('점수는 1점 이상 100점 이하로 입력해 주세요!');
           return
         }
 

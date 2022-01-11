@@ -2,33 +2,15 @@
     <div class="main-container">
       <ScrollTop /> 
         <!-- <WordCloud/> -->
-        <div class="chart-container mb-5">
-          {{this.$store.state.config.Loading}}
-          레이더
-          <RadarChart :data="this.chartInfo.data" :options="this.chartInfo.options" class="height-sm" />
-          도넛
-          <DoughnutChart :data="this.chartInfo.data" :options="this.chartInfo.options" class="height-sm" />
-          바
-          <BarChart :data="this.chartInfo.data" :options="this.chartInfo.options" class="height-sm" />
-          호리즌
-          <HorizontalBarChart :data="this.chartInfo.data" :options="this.chartInfo.options" class="height-sm" />
-          라인
-          <LineChart :data="this.chartInfo.data" :options="this.chartInfo.options" class="height-sm" />
-          폴라
-          <PolarAreaChart :data="this.chartInfo.data" :options="this.chartInfo.options" class="height-sm" />
-          버블
-          <BubbleChart :data="this.chartInfo.data" :options="this.chartInfo.options" class="height-sm" />
-          스캐터
-          <Scatter :data="this.chartInfo.data" :options="this.chartInfo.options" class="height-sm" />
-        </div>
         <div class="meta-catainer">
-          <!-- <div class="meta-title mb-3" @click="openMetaInfo">
-            메타인지란?
-            {{test}}
+          <div class="meta-title mb-3" @click="openMetaInfo">
+            MY META       
           <div class="arrow-down"><BIconChevronDown/></div>
-        </div> -->
+        </div> 
+        <span class="">아직 목표를 설정안 했다면 My page에서 목표 설정후 <br>
+        게시글을 작성해 봐요! </span><span class="mypage-btn" @click="goMypage" >목표 설정하러 가기</span>
           <!-- <div class="meta-toggle"> </div> -->
-          <hr/>
+          <!-- <hr/>
           <div v-bind:class="[ is_open_meta? 'meta-info-open ' : 'meta-info' ]">
             <div class="meta-eng">meta-cognition , Self reflection</div>
             <div class="meta-desc ">
@@ -40,8 +22,27 @@
               모르는 것이 무엇인지를 알고, 또 모르는 것으로 인해 발생하는 일이 어떤 것인지를 파악하면 <strong>부족한 점을 해결할 수 있는 학습 계획을 더욱 효율적으로 세울 수 있기 때문이라고 합니다.</strong> 
             </div>
             <hr>
-          </div>
+          </div> -->
         </div>
+        <div class="chart-container mb-3">     
+          <DoughnutChart :data="this.chartInfo.data" :options="this.chartInfo.options" class="height-sm" />
+          <!-- 
+          <BarChart :data="this.chartInfo.data" :options="this.chartInfo.options" class="height-sm" />
+          레이더
+          <RadarChart :data="this.chartInfo.data" :options="this.chartInfo.options" class="height-sm" />
+          도넛
+          <DoughnutChart :data="this.chartInfo.data" :options="this.chartInfo.options" class="height-sm" />
+          호리즌
+          <HorizontalBarChart :data="this.chartInfo.data" :options="this.chartInfo.options" class="height-sm" />
+          라인
+          <LineChart :data="this.chartInfo.data" :options="this.chartInfo.options" class="height-sm" />
+          폴라
+          <PolarAreaChart :data="this.chartInfo.data" :options="this.chartInfo.options" class="height-sm" />
+          버블
+          <BubbleChart :data="this.chartInfo.data" :options="this.chartInfo.options" class="height-sm" />
+          스캐터
+          <Scatter :data="this.chartInfo.data" :options="this.chartInfo.options" class="height-sm" /> -->
+        </div>   
         <!-- <div class="title-container">MY WORD</div> 
         <hr style="opacity:0.1; width: 80%; margin: 0px auto;" />
         <div class="keyword-container">
@@ -57,28 +58,28 @@
 import axios from "axios";
 import {mapState} from 'vuex'
 import ScrollTop from '../components/ScrollTop.vue'
-import RadarChart from '../chart/RadarChart.js';
+//import BarChart from '../chart/BarChart.js'
+// import RadarChart from '../chart/RadarChart.js';
 import DoughnutChart from '../chart/DoughnutChart.js'
-import BarChart from '../chart/BarChart.js'
-import HorizontalBarChart from '../chart/HorizontalBarChart.js'
-import LineChart from '../chart/LineChart.js'
-import PolarAreaChart from '../chart/PolarAreaChart.js'
-import BubbleChart from '../chart/BubbleChart.js'
-import Scatter from '../chart/Scatter.js'
+// import HorizontalBarChart from '../chart/HorizontalBarChart.js'
+// import LineChart from '../chart/LineChart.js'
+// import PolarAreaChart from '../chart/PolarAreaChart.js'
+// import BubbleChart from '../chart/BubbleChart.js'
+// import Scatter from '../chart/Scatter.js'
 //import WordCloud from '../components/WordCloud.vue'
 
 export default {
   name: "Home",
   components: { 
     ScrollTop, 
-    RadarChart,
+    //BarChart,
+    // RadarChart,
     DoughnutChart,
-    BarChart,
-    HorizontalBarChart,
-    LineChart,
-    PolarAreaChart,
-    BubbleChart,
-    Scatter
+    // HorizontalBarChart,
+    // LineChart,
+    // PolarAreaChart,
+    // BubbleChart,
+    // Scatter
     //WordCloud
   },
   data () {
@@ -91,7 +92,7 @@ export default {
   methods: {
     getContent (){
       axios.post(`${process.env.VUE_APP_API}/diary/main`,).then((res)=> {
-        //console.log("메인 데이터 : ",res.data)
+        console.log("메인 키워드 : ",res.data)
         this.$store.commit('SET_KEYWORD', res);
       }).catch((err)=> {
         console.error(err)
@@ -105,6 +106,9 @@ export default {
         this.$router.push("/login");
       }
     },
+    goMypage (){
+      this.$router.push("/mypage");
+    },
     getCategory (yn){
         if (!yn) yn = 'N';
         this.$store.dispatch('getCategory', yn).then(()=> {
@@ -113,14 +117,13 @@ export default {
               labels: this.chartData.labels,
               datasets: [{
                 label: 'Progress',
-                font: {
-                  size: 12
-                },
                 borderWidth: 2,
                 borderColor: '#ff5b57',
                 pointBackgroundColor: '#ff5b57',
                 pointRadius: 2,
-                backgroundColor: 'rgba(255, 91, 87, 0.2)',
+                backgroundColor:['rgba(114, 124, 182, 0.7)', 'rgba(52, 143, 226, 0.7)', 'rgba(0, 172, 172, 0.7)', 'rgba(182, 194, 201, 0.7)', 'rgba(45, 53, 60, 0.7)','rgba(244, 233, 150, 0.8)','rgba(249, 173, 215, 0.8)'
+                  ,'rgba(209, 239, 172, 0.8)', 'rgba(181, 255, 225, 0.8)', 'rgba(255, 167, 116, 0.8)'
+                ],
                 data: this.chartData.progress
               },]
             },
@@ -181,7 +184,11 @@ export default {
     z-index: 50;
   }
 
-
+  .mypage-btn{
+    cursor: pointer;
+    font-weight: bold;
+    color: #1266F1;
+  }
   .meta-info {
     height: 0;
     overflow: hidden;
@@ -193,8 +200,8 @@ export default {
   }
   .meta-title{
     text-decoration: none;
-    font-size: 7vw;
-    font-weight: bolder;
+    font-size: 5vw;
+    font-weight: bold;
     cursor: pointer;
     text-shadow:  0 0 1em rgba(0,0,0,0.1);
   }
