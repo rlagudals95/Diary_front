@@ -22,7 +22,6 @@ export const actions = {
         complete_yn : payload
       })
       .then((res) => {
-        
         console.log("카테고리 응답값 ????: ", res);
         mutations.SET_CATEGORY_CHART(state, res)
         mutations.SET_CATEGORY(state, res);
