@@ -25,7 +25,7 @@
           </div> -->
         </div>
         <div class="chart-container mb-3">     
-          <DoughnutChart :data="this.chartInfo.data" :options="this.chartInfo.options" class="height-sm" />
+          <DoughnutChart :data="this.chartData.data" :options="this.chartData.options" class="height-sm" />
           <!-- 
           <BarChart :data="this.chartInfo.data" :options="this.chartInfo.options" class="height-sm" />
           레이더
@@ -87,6 +87,7 @@ export default {
       is_open_meta: false,
       isLogin: localStorage.getItem('Authorization'),
       chartInfo : null,
+      chartData : null,
      }
   },
   methods: {
@@ -109,12 +110,28 @@ export default {
     goMypage (){
       this.$router.push("/mypage");
     },
-    getCategory (yn){
-        if (!yn) yn = 'N';
-        this.$store.dispatch('getCategory', yn).then(()=> {
-          let chartData = {
+    getChartData (){
+      let yn = 'N'
+      axios
+      .post(`${process.env.VUE_APP_API}/category/list`, {
+        complete_yn : yn
+      })
+      .then((res) => {
+        console.log("카테고리 응답값 ????111: ", res);
+        let that = this;
+
+        let loopCnt = res.data.length;
+        let labels = [];
+        let progresses = [];
+
+        for (let i = 0; i < loopCnt; i++) {
+          labels.push(res.data[i].name);
+          progresses.push(res.data[i].progress);
+        }
+
+        let chartData = {
             data: {
-              labels: this.chartData.labels,
+              labels: labels,
               datasets: [{
                 label: 'Progress',
                 borderWidth: 2,
@@ -124,7 +141,7 @@ export default {
                 backgroundColor:['rgba(114, 124, 182, 0.7)', 'rgba(52, 143, 226, 0.7)', 'rgba(0, 172, 172, 0.7)', 'rgba(182, 194, 201, 0.7)', 'rgba(45, 53, 60, 0.7)','rgba(244, 233, 150, 0.8)','rgba(249, 173, 215, 0.8)'
                   ,'rgba(209, 239, 172, 0.8)', 'rgba(181, 255, 225, 0.8)', 'rgba(255, 167, 116, 0.8)'
                 ],
-                data: this.chartData.progress
+                data: progresses
               },]
             },
             options: {
@@ -132,8 +149,12 @@ export default {
               maintainAspectRatio: false,
             }
           }
-          this.chartInfo = chartData;
-        })     
+          that.chartData = chartData
+          console.log('바로 주자./..',chartData)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     },
   },
   computed : {
@@ -151,14 +172,8 @@ export default {
   },
   created (){
     this.goLogin ();
-    this.getCategory();
+    this.getChartData();
   },
-  watch :{
-    chartInfo: function () {
-      console.log('차트 데이터 변경')
-      this.$forceUpdate();
-    }
-  }
 };
 </script>
 

@@ -88,8 +88,34 @@ export const mutations = {
       labels.push(payload.data[i].name);
       progresses.push(payload.data[i].progress);
     }
-
+    // 
+    
     state.category_chart.labels = labels;
     state.category_chart.progress = progresses;
+
+    let _labels = labels;
+    let _progresses= progresses;
+
+    let chartData = {
+      data: {
+        labels: _labels,
+        datasets: [{
+          label: 'Progress',
+          borderWidth: 2,
+          borderColor: '#ff5b57',
+          pointBackgroundColor: '#ff5b57',
+          pointRadius: 2,
+          backgroundColor:['rgba(114, 124, 182, 0.7)', 'rgba(52, 143, 226, 0.7)', 'rgba(0, 172, 172, 0.7)', 'rgba(182, 194, 201, 0.7)', 'rgba(45, 53, 60, 0.7)','rgba(244, 233, 150, 0.8)','rgba(249, 173, 215, 0.8)'
+            ,'rgba(209, 239, 172, 0.8)', 'rgba(181, 255, 225, 0.8)', 'rgba(255, 167, 116, 0.8)'
+          ],
+          data: _progresses
+        },]
+      },
+      options: {
+        responsive: true, 
+        maintainAspectRatio: false,
+      }
+    }
+    state.chart_data = chartData;
   },
 };
