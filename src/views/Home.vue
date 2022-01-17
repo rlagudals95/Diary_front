@@ -7,6 +7,7 @@
             MY META       
           <div class="arrow-down"><BIconChevronDown/></div>
         </div> 
+        <a href="https://kauth.kakao.com/oauth/authorize?client_id=9a02524f15a3577f60c041db6dbef087&redirect_uri=http://localhost:8030&response_type=code"><img src="/image/kakao_login_medium.png"></a>
         <span class="">아직 목표를 설정안 했다면 My page에서 목표 설정후 <br>
         게시글을 작성해 봐요! </span><span class="mypage-btn" @click="goMypage" >목표 설정하러 가기</span>
           <!-- <div class="meta-toggle"> </div> -->
