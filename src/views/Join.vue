@@ -103,6 +103,7 @@ import axios from "axios";
             this.$router.push('login')
         }).catch((err)=> {
             console.log('회원가입 실패 : ',err);
+            alert('username이 중복되었습니다.');
         })
 
         //alert(JSON.stringify(this.form))
