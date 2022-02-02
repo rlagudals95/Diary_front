@@ -39,7 +39,7 @@ export default {
         goLogOut (){
             this.$router.push('login')
             localStorage.clear()
-            //window.location.reload();
+            window.location.reload();
         },
         goMypage (){
             this.$router.push('mypage')
