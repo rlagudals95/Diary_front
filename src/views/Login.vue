@@ -60,7 +60,10 @@ export default {
             this.$store.commit("SET_LOGIN",res);
             this.$router.push("/");
           }
-        });
+        }).catch((err)=> {
+          console.log('로그인에러 : ', err);
+          alert('아이디 혹은 비밀번호를 확인해주세요 :)');
+        })
     },
     goJoin() {
       this.$router.push("join");

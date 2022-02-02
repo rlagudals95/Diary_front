@@ -2,9 +2,9 @@
 <div class="nav-wrap" :class="{'nav-down' : navDown}" >
     <b-nav class="nav-up nav-container" >
         <span class="nav-left">
-            <router-link to="/"><b-nav-text class="logo" >META &nbsp;&nbsp;</b-nav-text></router-link>
+            <router-link v-show="isLogin" to="/"><b-nav-text class="logo" >META &nbsp;&nbsp;</b-nav-text></router-link>
         <!-- <b-nav-item @click="goUpload()" :class="{'nav-down' : navDown}">Post</b-nav-item> -->     
-            <b-nav-item @click="goDiary()">Diary</b-nav-item>
+            <b-nav-item v-show="isLogin" @click="goDiary()">Diary</b-nav-item>
             <b-nav-item v-if="isLogin" @click="goMypage()">MyPage</b-nav-item>
             <b-nav-item v-else @click="goLogin()">Login</b-nav-item>
         </span>
@@ -38,7 +38,8 @@ export default {
         },
         goLogOut (){
             this.$router.push('login')
-            localStorage.removeItem('Authorization')
+            localStorage.clear()
+            //window.location.reload();
         },
         goMypage (){
             this.$router.push('mypage')
